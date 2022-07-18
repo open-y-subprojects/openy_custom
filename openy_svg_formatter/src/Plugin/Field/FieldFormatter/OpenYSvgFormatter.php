@@ -43,7 +43,12 @@ class OpenYSvgFormatter extends FormatterBase {
     foreach ($items as $delta => $item) {
       if ($item->entity) {
         $uri = $item->entity->getFileUri();
-        $svg = file_get_contents($uri);
+        $svg = '';
+        // Make sure the file actually exists.
+        if (file_exists($uri)) {
+          \Drupal::logger('locale')->warning('Could not open SVG file: %s', ['%s' => $uri]);
+          $svg = file_get_contents($uri);
+        }        
         $elements[$delta] = [
           '#type' => 'inline_template',
           '#template' => $svg,
