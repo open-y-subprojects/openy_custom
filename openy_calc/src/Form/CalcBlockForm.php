@@ -182,8 +182,7 @@ class CalcBlockForm extends FormBase {
         '#submit' => [[$this, 'navButtonSubmit']],
         '#ajax' => $this->getAjaxDefaults(),
         '#attributes' => [
-          'class' => ['btn', 'blue', 'pull-left'],
-          'translate' => 'no',
+          'class' => ['btn', 'blue', 'pull-left']
         ],
       ];
       $form['#attached']['library'][] = 'openy_calc/submit';
@@ -197,8 +196,7 @@ class CalcBlockForm extends FormBase {
         '#submit' => [[$this, 'navButtonSubmit']],
         '#ajax' => $this->getAjaxDefaults(),
         '#attributes' => [
-          'class' => ['btn', 'blue', 'pull-right'],
-          'translate' => 'no',
+          'class' => ['btn', 'blue', 'pull-right']
         ],
       ];
     }
@@ -211,8 +209,7 @@ class CalcBlockForm extends FormBase {
             'btn',
             'complete-registration',
             'pull-right',
-          ],
-          'translate' => 'no',
+          ]
         ],
       ];
     }
@@ -233,7 +230,17 @@ class CalcBlockForm extends FormBase {
       $storage['type'] = $form_state->getValue('type');
     }
     $form_state->setStorage($storage);
-    $form_state->setRebuild();
+    
+    # Google Translate kills the submit button, so we detect a submit with `op`.
+    # We can't check the value because it will be translated on the front-end,
+    # but `op` is only set when the final `submit` is clicked.
+    if (isset($_POST["op"])) {
+      $this->submitForm($form, $form_state);
+    }
+    # If not a final submit, then go on to the next step.
+    else {
+      $form_state->setRebuild();
+    }
   }
 
   /**
