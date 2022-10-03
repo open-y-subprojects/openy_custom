@@ -86,7 +86,6 @@ class HBLocModal extends HomeBranchLibraryBase implements ContainerFactoryPlugin
       'modalTitle' => $title,
       'modalDescription' => $description,
       'dontAskTitle' => $this->t('Don\'t ask me again'),
-      // Delay until next window display 24h.
       'modalDelay' => $delay,
       'learnMoreText' => $learn_more['value'],
     ];
