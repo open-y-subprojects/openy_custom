@@ -2,7 +2,7 @@ openy_system.openy_config:
   path: '/admin/openy'
   defaults:
     _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
-    _title: 'Open Y'
+    _title: 'YMCA Website Services'
   requirements:
     _permission: 'access administration pages'
 
