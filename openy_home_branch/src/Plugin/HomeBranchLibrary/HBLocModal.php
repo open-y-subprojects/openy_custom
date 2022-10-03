@@ -4,6 +4,9 @@ namespace Drupal\openy_home_branch\Plugin\HomeBranchLibrary;
 
 use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\openy_home_branch\HomeBranchLibraryBase;
+use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+use Drupal\Core\Config\ConfigFactoryInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines the home branch library plugin for modal with locations.
@@ -14,9 +17,45 @@ use Drupal\openy_home_branch\HomeBranchLibraryBase;
  *   entity="block"
  * )
  */
-class HBLocModal extends HomeBranchLibraryBase {
+class HBLocModal extends HomeBranchLibraryBase implements ContainerFactoryPluginInterface {
 
   use StringTranslationTrait;
+
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
+  protected $configFactory;
+
+  /**
+   * Creates plugin instance.
+   *
+   * @param array $configuration
+   *   Plugin id.
+   * @param string $plugin_id
+   *   Plugin definition.
+   * @param mixed $plugin_definition
+   *   RouteMatch service instance.
+   * @param $config_factory
+   *   The config factory.
+   */
+  public function __construct(array $configuration, $plugin_id, $plugin_definition, ConfigFactoryInterface $config_factory) {
+    parent::__construct($configuration, $plugin_id, $plugin_definition);
+    $this->configFactory = $config_factory;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
+    return new static(
+      $configuration,
+      $plugin_id,
+      $plugin_definition,
+      $container->get('config.factory')
+    );
+  }
 
   /**
    * {@inheritdoc}
@@ -37,18 +76,18 @@ class HBLocModal extends HomeBranchLibraryBase {
    * {@inheritdoc}
    */
   public function getLibrarySettings() {
+    $config = $this->configFactory->get('openy_home_branch.settings');
+    $title = $config->get('popup_title');
+    $description = $config->get('popup_description');
+    $learn_more = $config->get('popup_learn_more');
+    $delay = $config->get('popup_delay');
+
     return [
-      'modalTitle' => $this->t('Home branch'),
-      'modalDescription' => $this->t('Would you like to set a different location as your "home branch"?'),
+      'modalTitle' => $title,
+      'modalDescription' => $description,
       'dontAskTitle' => $this->t('Don\'t ask me again'),
-      // Delay until next window display 24h.
-      'modalDelay' => 86400,
-      'learnMoreText' => $this->t('
-        <h5>Why set your home branch?</h5>
-        <p>Many YMCA members primarily visit one YMCA branch. Setting your home branch customizes your experience with schedules and programs for that branch. You are still able to view information for all other branches.</p>
-        <h5>Changing your home branch</h5>
-        <p>You can change your home branch at any time by using the branch link at the top of the website. </p>
-      '),
+      'modalDelay' => $delay,
+      'learnMoreText' => $learn_more['value'],
     ];
   }
 
