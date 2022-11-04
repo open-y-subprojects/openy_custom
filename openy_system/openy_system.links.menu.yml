@@ -1,5 +1,5 @@
 openy_system.openy:
-  title: Open Y
+  title: YMCA Website Services
   description: 'Configure Open Y distribution settings.'
   parent: system.admin
   route_name: openy_system.openy_config
