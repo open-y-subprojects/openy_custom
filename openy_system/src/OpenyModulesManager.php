@@ -280,7 +280,7 @@ class OpenyModulesManager {
       return;
     }
     // Get config entities that are dependent on module.
-    $dependencies = $this->configManager->findConfigEntityDependentsAsEntities('module', (array) $module_name);
+    $dependencies = $this->configManager->findConfigEntityDependenciesAsEntities('module', (array) $module_name);
     // Create array of dependent migrations for module.
     // That module should be listed in dependencies of migration config.
     foreach ($dependencies as $dependency) {
