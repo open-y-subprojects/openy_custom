@@ -122,7 +122,7 @@ function openy_ckeditor_ckeditor_css_alter(array &$css, Editor $editor) {
   ];
 
   if (in_array($editor->getFilterFormat()->id(), $known_formats)) {
-    $css[] = drupal_get_path('module', 'openy_ckeditor') . '/css/openy_ckeditor.admin.css';
+    $css[] = \Drupal::service('extension.list.module')->getPath('openy_ckeditor') . '/css/openy_ckeditor.admin.css';
   }
 }
 

@@ -38,7 +38,7 @@ class CKEditorAlters extends CKEditorPluginBase implements CKEditorPluginInterfa
   public function getFile() {
     // Make sure that the path to the plugin.js matches the file structure of
     // the CKEditor plugin you are implementing.
-    return drupal_get_path('module', 'openy_ckeditor') . '/js/plugins/ckeditor_alters/plugin.js';
+    return \Drupal::service('extension.list.module')->getPath('openy_ckeditor') . '/js/plugins/ckeditor_alters/plugin.js';
   }
 
   /**

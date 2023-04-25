@@ -68,7 +68,7 @@ class ModulePath extends ProcessPluginBase implements ContainerFactoryPluginInte
     }
 
     // Get module path.
-    return drupal_get_path('module', $value);
+    return \Drupal::service('extension.list.module')->getPath($value);
   }
 
 }
