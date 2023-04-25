@@ -15,6 +15,7 @@ function _openy_session_instance_update_all_sessions(&$sandbox) {
     $sandbox['progress'] = 0;
     $sandbox['current'] = 0;
     $sandbox['max'] = Drupal::entityQuery('node')
+      ->accessCheck(FALSE)
       ->condition('type', 'session')
       ->count()
       ->execute();
@@ -22,6 +23,7 @@ function _openy_session_instance_update_all_sessions(&$sandbox) {
 
   // Recreate session instances in chunks of 20 sessions.
   $ids = Drupal::entityQuery('node')
+    ->accessCheck(FALSE)
     ->condition('type', 'session')
     ->condition('nid', $sandbox['current'], '>')
     ->range(0, 20)
