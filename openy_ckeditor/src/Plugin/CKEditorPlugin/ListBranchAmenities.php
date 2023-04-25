@@ -24,7 +24,7 @@ class ListBranchAmenities extends PluginBase implements CKEditorPluginInterface,
     return [
       'ListBranchAmenities' => [
         'label' => t('List of Branch Amenities'),
-        'image' => drupal_get_path('module', 'openy_ckeditor') . '/js/plugins/list_branch_amenities/icon.png',
+        'image' => \Drupal::service('extension.list.module')->getPath('openy_ckeditor') . '/js/plugins/list_branch_amenities/icon.png',
       ],
     ];
   }
@@ -54,7 +54,7 @@ class ListBranchAmenities extends PluginBase implements CKEditorPluginInterface,
    * {@inheritdoc}
    */
   public function getFile() {
-    return drupal_get_path('module', 'openy_ckeditor') . '/js/plugins/list_branch_amenities/plugin.js';
+    return \Drupal::service('extension.list.module')->getPath('openy_ckeditor') . '/js/plugins/list_branch_amenities/plugin.js';
   }
 
   /**

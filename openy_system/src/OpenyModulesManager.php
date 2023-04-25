@@ -444,7 +444,7 @@ class OpenyModulesManager {
    */
   public function postUninstall($module_name) {
     // Get install and optional configs list for module_name.
-    $module_path = drupal_get_path('module', $module_name);
+    $module_path = \Drupal::service('extension.list.module')->getPath($module_name);
     $file_storage_install = new FileStorage($module_path . '/config/install');
     $module_install_configs = $file_storage_install->listAll();
     $file_storage_optional = new FileStorage($module_path . '/config/optional');
