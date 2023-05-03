@@ -47,7 +47,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    /* @var $config \Drupal\Core\Config\Config */
+    /** @var \Drupal\Core\Config\Config $config */
     $config = \Drupal::service('config.factory')->getEditable('openy_analytics.settings');
 
     if ($server_url = $form_state->getValue('server_url')) {

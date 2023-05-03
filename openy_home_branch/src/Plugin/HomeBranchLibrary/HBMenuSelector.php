@@ -103,7 +103,7 @@ class HBMenuSelector extends HomeBranchLibraryBase implements ContainerFactoryPl
    */
   public function getCacheTags() {
     $tags = ['node_list'];
-    foreach(array_keys($this->branchesList) as $id) {
+    foreach (array_keys($this->branchesList) as $id) {
       $tags[] = 'node:' . $id;
     }
 

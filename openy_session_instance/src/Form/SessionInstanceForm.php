@@ -16,7 +16,7 @@ class SessionInstanceForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\openy_session_instance\Entity\SessionInstance */
+    /** @var \Drupal\openy_session_instance\Entity\SessionInstance $entity */
     $form = parent::buildForm($form, $form_state);
 
     $entity = $this->entity;

@@ -87,7 +87,7 @@ class OpenyModulesUninstallForm extends ModulesUninstallForm {
       '#button_type' => 'primary',
     ];
 
-    // TODO: Also, before component removing - would be nice to add a step
+    // @todo Also, before component removing - would be nice to add a step
     // with a list of entities and where they are used ( for paragraps ) to
     // let content managers check all will be good after removal.
     // Just a simple table with a list of view/edit.

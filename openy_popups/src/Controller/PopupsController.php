@@ -24,7 +24,7 @@ class PopupsController extends ControllerBase {
    * @param string $js
    *   Nojs|ajax.
    *
-   * @return AjaxResponse
+   * @return \Drupal\Core\Ajax\AjaxResponse
    *   Response.
    */
   public function branchPopup($js = 'nojs') {
@@ -44,12 +44,12 @@ class PopupsController extends ControllerBase {
   /**
    * ClassBranch Popup.
    *
-   * @param NodeInterface $node
+   * @param \Drupal\node\NodeInterface $node
    *   A node object.
    * @param string $js
    *   Nojs|ajax.
    *
-   * @return AjaxResponse
+   * @return \Drupal\Core\Ajax\AjaxResponse
    *   Response.
    */
   public function classBranchPopup(NodeInterface $node, $js = 'nojs') {
@@ -92,7 +92,7 @@ class PopupsController extends ControllerBase {
    * Popup Content.
    */
   public function buildPopupContent($node = FALSE) {
-    $destination = isset($_REQUEST['destination']) ? $_REQUEST['destination'] : '';
+    $destination = $_REQUEST['destination'] ?? '';
 
     if ($node) {
       // Check special cases (0 or 1 available location).

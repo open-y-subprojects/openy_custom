@@ -2,11 +2,8 @@
 
 namespace Drupal\openy_session_instance;
 
-use Drupal;
 use Drupal\Core\Datetime\DrupalDateTime;
-use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
-use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Entity\Query\QueryInterface;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
@@ -33,21 +30,21 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
   /**
    * The entity type manager.
    *
-   * @var EntityTypeManager
+   * @var \Drupal\Core\Entity\EntityTypeManager
    */
   protected $entityTypeManager;
 
   /**
    * The entity storage.
    *
-   * @var EntityStorageInterface
+   * @var \Drupal\Core\Entity\EntityStorageInterface
    */
   protected $storage;
 
   /**
    * LoggerChannelFactoryInterface definition.
    *
-   * @var LoggerChannelFactoryInterface
+   * @var \Drupal\Core\Logger\LoggerChannelFactoryInterface
    */
   protected $logger;
 
@@ -280,7 +277,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
   /**
    * Fetches sessions schedule.
    *
-   * @param NodeInterface $node
+   * @param \Drupal\node\NodeInterface $node
    *   The session node.
    *
    * @return array|bool
@@ -417,13 +414,13 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
    *   The condition value.
    */
   private static function addEntityQueryCondition(QueryInterface &$query, $key, $value) {
-    $simple = array(
+    $simple = [
       'from' => ['timestamp', '>='],
       'to' => ['timestamp', '<'],
-    );
+    ];
 
     if (isset($simple[$key])) {
-      list($field, $op) = $simple[$key];
+      [$field, $op] = $simple[$key];
       $query->condition($field, $value, $op);
       return;
     }

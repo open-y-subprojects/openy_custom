@@ -10,11 +10,8 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
-use Drupal\Core\Logger\LoggerChannelInterface;
 use Drupal\Core\Url;
-use Drupal\node\NodeInterface;
 use Drupal\openy_repeat\RepeatManager;
-use Drupal\openy_session_instance\Entity\SessionInstanceInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -28,14 +25,14 @@ class SchedulesSearchForm extends FormBase {
   /**
    * The logger channel.
    *
-   * @var LoggerChannelInterface
+   * @var \Drupal\Core\Logger\LoggerChannelInterface
    */
   protected $logger;
 
   /**
    * The node object.
    *
-   * @var NodeInterface
+   * @var \Drupal\node\NodeInterface
    */
   protected $node;
 
@@ -63,13 +60,13 @@ class SchedulesSearchForm extends FormBase {
   /**
    * Creates a new BranchSessionsForm.
    *
-   * @param LoggerChannelFactoryInterface $logger_factory
+   * @param \Drupal\Core\Logger\LoggerChannelFactoryInterface $logger_factory
    *   The logger channel factory.
-   * @param RequestStack $request_stack
+   * @param \Symfony\Component\HttpFoundation\RequestStack $request_stack
    *   The request stack.
-   * @param EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The EntityTypeManager.
-   * @param RepeatManager $session_instance_manager
+   * @param \Drupal\openy_repeat\RepeatManager $session_instance_manager
    *   The SessionInstanceManager.
    */
   public function __construct(
@@ -86,13 +83,13 @@ class SchedulesSearchForm extends FormBase {
     $today = new DrupalDateTime('now');
     $today = $today->format('m/d/Y');
     $state = [
-      'location' => isset($parameters['location']) ? $parameters['location'] : 'All',
-      'program' => isset($parameters['program']) ? $parameters['program'] : 'all',
-      'category' => isset($parameters['category']) ? $parameters['category'] : 'all',
-      'class' => isset($parameters['class']) ? $parameters['class'] : 'all',
-      'date' => isset($parameters['date']) ? $parameters['date'] : $today,
-      'time' => isset($parameters['time']) ? $parameters['time'] : 'all',
-      'display' => isset($parameters['display']) ? $parameters['display'] : 0,
+      'location' => $parameters['location'] ?? 'All',
+      'program' => $parameters['program'] ?? 'all',
+      'category' => $parameters['category'] ?? 'all',
+      'class' => $parameters['class'] ?? 'all',
+      'date' => $parameters['date'] ?? $today,
+      'time' => $parameters['time'] ?? 'all',
+      'display' => $parameters['display'] ?? 0,
     ];
     $this->logger = $logger_factory->get('openy_schedules');
     $this->setRequestStack($request_stack);
@@ -300,7 +297,7 @@ class SchedulesSearchForm extends FormBase {
    */
   public function getTimeOptions() {
     $options = [
-      'all' => 'All'
+      'all' => 'All',
     ];
     // Add options each half hour from 00:00:00 to 23:30:00 with values
     // 12:00:00 AM to 11:30:00 PM.
@@ -349,7 +346,7 @@ class SchedulesSearchForm extends FormBase {
    *
    * @param array $form
    * @param array $values
-   * @param \stdClass $options
+   * @param object $options
    */
   private function addFormElements(array &$form, array $values) {
     $form['filter_controls'] = [
@@ -376,7 +373,7 @@ class SchedulesSearchForm extends FormBase {
       '#title' => $this->t('Location'),
       '#options' => $this->getLocationOptions(),
       '#prefix' => '<hr/>',
-      '#default_value' => isset($values['location']) ? $values['location'] : 'All',
+      '#default_value' => $values['location'] ?? 'All',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
@@ -393,7 +390,7 @@ class SchedulesSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Program'),
       '#options' => $this->getProgramOptions(),
-      '#default_value' => isset($values['program']) ? $values['program'] : 'all',
+      '#default_value' => $values['program'] ?? 'all',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
@@ -410,7 +407,7 @@ class SchedulesSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Sub-Program'),
       '#options' => $this->getCategoryOptions(),
-      '#default_value' => isset($values['category']) ? $values['category'] : 'all',
+      '#default_value' => $values['category'] ?? 'all',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
@@ -427,7 +424,7 @@ class SchedulesSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Class'),
       '#options' => $this->getClassOptions(),
-      '#default_value' => isset($values['class']) ? $values['class'] : 'all',
+      '#default_value' => $values['class'] ?? 'all',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
@@ -443,7 +440,7 @@ class SchedulesSearchForm extends FormBase {
     $form['selects']['date'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Date'),
-      '#default_value' => isset($values['date']) ? $values['date'] : '',
+      '#default_value' => $values['date'] ?? '',
       '#attributes' => [
         'class' => ['openy-schedule-datepicker'],
       ],
@@ -465,7 +462,7 @@ class SchedulesSearchForm extends FormBase {
       '#type' => 'select',
       '#title' => $this->t('Start Time:'),
       '#options' => $this->getTimeOptions(),
-      '#default_value' => isset($values['time']) ? $values['time'] : 'all',
+      '#default_value' => $values['time'] ?? 'all',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
@@ -481,7 +478,7 @@ class SchedulesSearchForm extends FormBase {
     $form['selects']['display'] = [
       '#type' => 'checkbox',
       '#title' => $this->t('Weekly View'),
-      '#default_value' => isset($values['display']) ? $values['display'] : 0,
+      '#default_value' => $values['display'] ?? 0,
       '#title_display' => 'before',
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
@@ -509,7 +506,7 @@ class SchedulesSearchForm extends FormBase {
         'class' => [
           'btn',
           'blue',
-        ]
+        ],
       ],
       '#value' => $this->t('Apply filters'),
       '#ajax' => [
@@ -539,7 +536,7 @@ class SchedulesSearchForm extends FormBase {
    * Update form user input.
    *
    * @param \Drupal\Core\Form\FormStateInterface $form_state
-   * @param \stdClass $options
+   * @param object $options
    */
   protected function updateUserInput(FormStateInterface &$form_state, array $values) {
     $user_input = $form_state->getUserInput();
@@ -616,7 +613,7 @@ class SchedulesSearchForm extends FormBase {
         $branch_hours = $renderer->renderRoot($branch_hours);
         $formatted_results = $this->buildResults($form, $values);
         $formatted_results = $renderer->renderRoot($formatted_results);
-        // TODO: replace with render arrays.
+        // @todo replace with render arrays.
         $rendered_results = '
         <div id="schedules-search-listing-wrapper">
           <div class="branch-hours-wrapper clearfix">' . $branch_hours . '</div>
@@ -705,7 +702,7 @@ class SchedulesSearchForm extends FormBase {
       $timezone = date_default_timezone_get();
       $date = DrupalDateTime::createFromFormat('m/d/Y', $parameters['date'], $timezone);
       $date = strtolower($date->format('D'));
-      /* @var $location \Drupal\node\Entity\Node */
+      /** @var \Drupal\node\Entity\Node $location */
       if ($location = $this->entityTypeManager->getStorage('node')->load($id)) {
         $form['#cache']['tags'] = !empty($form['#cache']['tags']) ? $form['#cache']['tags'] : [];
         $form['#cache']['tags'] = $form['#cache']['tags'] + $location->getCacheTags();
@@ -794,7 +791,7 @@ class SchedulesSearchForm extends FormBase {
     ]);
 
     foreach ($session_instances as $session_instance) {
-      /* @var $session_instance \Drupal\openy_session_instance\Entity\SessionInstanceInterface */
+      /** @var \Drupal\openy_session_instance\Entity\SessionInstanceInterface $session_instance */
       $session = $session_instance->session->referencedEntities();
       $session = reset($session);
       // Check for class arg.

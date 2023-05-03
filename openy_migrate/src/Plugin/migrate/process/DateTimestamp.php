@@ -8,7 +8,7 @@ use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\Row;
 
 /**
- *  Migrage process plugin date(to_format, timestamp);
+ * Migrage process plugin date(to_format, timestamp);
  *
  * @MigrateProcessPlugin(
  *   id = "date_timestamp"

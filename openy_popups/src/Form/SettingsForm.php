@@ -5,7 +5,6 @@ namespace Drupal\openy_popups\Form;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
-use Drupal\openy_popups\Form\BranchesForm;
 
 /**
  * Settings Form for openy_popups.
@@ -38,7 +37,7 @@ class SettingsForm extends ConfigFormBase {
     $form = parent::buildForm($form, $form_state);
 
     $default = $config->get('location');
-    
+
     $form['img'] = [
       '#type' => 'managed_file',
       '#title' => t('Popup image'),

@@ -16,7 +16,7 @@ class LoggerEntityForm extends ContentEntityForm {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    /* @var $entity \Drupal\logger_entity\Entity\LoggerEntity */
+    /** @var \Drupal\logger_entity\Entity\LoggerEntity $entity */
     $form = parent::buildForm($form, $form_state);
 
     $form['data'] = [

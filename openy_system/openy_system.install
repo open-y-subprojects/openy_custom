@@ -5,7 +5,7 @@
  * Open Y System install file.
  */
 
-use \Drupal\user\Entity\Role;
+use Drupal\user\Entity\Role;
 
 /**
  * Add permission for administrator role.

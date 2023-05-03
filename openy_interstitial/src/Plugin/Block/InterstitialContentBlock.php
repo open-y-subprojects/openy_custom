@@ -71,7 +71,7 @@ class InterstitialContentBlock extends BlockBase implements ContainerFactoryPlug
     $block = [];
     $block['#cache']['max-age'] = INTERSTITIAL_BLOCK_CACHE_TIME;
 
-    // Get all Interstitial page node
+    // Get all Interstitial page node.
     $entity_type_manager = $this->container->get('entity_type.manager');
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
     $query = $entity_type_manager->getStorage('node')->getQuery()
@@ -84,10 +84,10 @@ class InterstitialContentBlock extends BlockBase implements ContainerFactoryPlug
       return $block;
     }
 
-    /** @var Node $interstitialPage */
+    /** @var \Drupal\node\Entity\Node $interstitialPage */
     $interstitialPage = Node::load(reset($res));
 
-    // Check COOKIES if we need to show this block
+    // Check COOKIES if we need to show this block.
     $showTimes = $interstitialPage->field_show_times->value;
     $cookieCount = $this->request->cookies->get('OpenYInterstitialBlock');
     if ($cookieCount > $showTimes) {

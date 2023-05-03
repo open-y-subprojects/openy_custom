@@ -1,4 +1,5 @@
 <?php
+
 namespace Drupal\openy_repeat_entity\Entity;
 
 use Drupal\Core\Entity\ContentEntityBase;
@@ -39,7 +40,6 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
   public function getTimestampTo() {
     return $this->get('end')->value;
   }
-
 
   /**
    * Retrieves Repeat Event location node.
@@ -98,12 +98,12 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
         else {
           // M j - j, Y.
           $day_to = date('j', $timestamp_to);
-          $formatted_date =  "$month_day_start - $day_to, $year_start";
+          $formatted_date = "$month_day_start - $day_to, $year_start";
         }
       }
       else {
         // M j - M j, Y.
-        $formatted_date =  "$month_day_start - $month_day_to, $year_start";
+        $formatted_date = "$month_day_start - $month_day_to, $year_start";
       }
     }
     else {
@@ -113,7 +113,6 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
 
     return $formatted_date;
   }
-
 
   /**
    * {@inheritdoc}
@@ -138,52 +137,52 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
         'type' => 'entity_reference_label',
       ])
       ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete'
+        'type' => 'entity_reference_autocomplete',
       ]);
 
     $fields['start'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Repeat Start'))
       ->setDescription(t('The repeat start.'))
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'date',
         'weight' => 2,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'timestamp',
         'weight' => 3,
-      ));
+      ]);
 
     $fields['end'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('Repeat End'))
       ->setDescription(t('The repeat end.'))
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'date',
         'weight' => 2,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'timestamp',
         'weight' => 3,
-      ));
+      ]);
 
     $fields['year'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Repeat Year'))
       ->setDescription(t('The repeat year. Leave * to repeat every year.'))
       ->setRequired(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '*',
         'max_length' => 11,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => 3,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => 3,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -191,20 +190,20 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
       ->setLabel(t('Repeat Month'))
       ->setDescription(t('The repeat month. Leave * to repeat every month.'))
       ->setRequired(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '*',
         'max_length' => 11,
         'allowed_values' => ['*' => '*'] + DateHelper::monthNamesUntranslated(),
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'list_default',
         'weight' => 4,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'options_select',
         'weight' => 4,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -212,19 +211,19 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
       ->setLabel(t('Repeat Day'))
       ->setDescription(t('The repeat day. Leave * to repeat every day.'))
       ->setRequired(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '*',
         'max_length' => 11,
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => 5,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'weight' => 5,
-      ))
+      ])
       ->addConstraint('range_asteriks', [
         'min' => 1,
         'max' => DateHelper::daysInYear(),
@@ -236,23 +235,23 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
       ->setLabel(t('Repeat Week'))
       ->setDescription(t('The repeat week. Leave * to repeat every week.'))
       ->setRequired(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '*',
         'allowed_values' => ['*' => '*'] + range(1, 52),
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
         'weight' => 6,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'string_textfield',
         'settings' => [
           'default_value' => '*',
           'empty' => FALSE,
         ],
         'weight' => 6,
-      ))
+      ])
       ->addConstraint('range_asteriks', [
         'min' => 1,
         'max' => 52,
@@ -264,24 +263,24 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
       ->setLabel(t('Repeat Weekday'))
       ->setDescription(t('The repeat weekday. Leave * to repeat every weekday.'))
       ->setRequired(TRUE)
-      ->setSettings(array(
+      ->setSettings([
         'default_value' => '*',
         'max_length' => 11,
         'allowed_values' => ['*' => '*'] + DateHelper::weekDaysOrdered(DateHelper::weekDaysUntranslated()),
-      ))
-      ->setDisplayOptions('view', array(
+      ])
+      ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'list_default',
         'weight' => 7,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'options_select',
         'settings' => [
           'default_value' => '*',
           'empty' => FALSE,
         ],
         'weight' => 7,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
@@ -294,7 +293,7 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
         'type' => 'entity_reference_label',
       ])
       ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete'
+        'type' => 'entity_reference_autocomplete',
       ]);
 
     $fields['location'] = BaseFieldDefinition::create('entity_reference')
@@ -306,7 +305,7 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
         'type' => 'entity_reference_label',
       ])
       ->setDisplayOptions('form', [
-        'type' => 'entity_reference_autocomplete'
+        'type' => 'entity_reference_autocomplete',
       ]);
 
     $fields['room'] = BaseFieldDefinition::create('string')
@@ -364,4 +363,5 @@ class Repeat extends ContentEntityBase implements RepeatInterface {
 
     return $fields;
   }
+
 }

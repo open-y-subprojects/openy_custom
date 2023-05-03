@@ -26,15 +26,15 @@ class FaqDefault extends WidgetBase {
     $element['question'] = [
       '#title' => $this->t('Question'),
       '#type' => 'textfield',
-      '#default_value' => isset($items[$delta]->question) ? $items[$delta]->question : NULL,
+      '#default_value' => $items[$delta]->question ?? NULL,
     ];
 
     $element['answer'] = [
       '#title' => $this->t('Answer'),
       '#type' => 'text_format',
       '#rows' => 5,
-      '#default_value' => isset($items[$delta]->answer) ? $items[$delta]->answer : NULL,
-      '#format' => isset($items[$delta]->format) ? $items[$delta]->format : NULL,
+      '#default_value' => $items[$delta]->answer ?? NULL,
+      '#format' => $items[$delta]->format ?? NULL,
       '#base_type' => 'textarea',
     ];
 

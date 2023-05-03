@@ -13,9 +13,9 @@ class HeaderController extends ControllerBase {
    * {@inheritdoc}
    */
   public function content() {
-    $build = array(
+    $build = [
       '#type' => 'markup',
-    );
+    ];
     return $build;
   }
 

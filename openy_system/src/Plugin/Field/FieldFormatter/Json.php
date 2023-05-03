@@ -2,13 +2,10 @@
 
 namespace Drupal\openy_system\Plugin\Field\FieldFormatter;
 
-use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
-use Drupal\Core\Field\FieldItemInterface;
 use Drupal\Core\Field\FormatterBase;
 use Drupal\Core\Field\FieldItemListInterface;
-use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -87,10 +84,9 @@ class Json extends FormatterBase implements ContainerFactoryPluginInterface {
     $elements = [];
     $url = NULL;
 
-
     foreach ($items as $delta => $item) {
       $view_value = [
-        '#markup' => print_r(json_decode($item->value, TRUE),1)
+        '#markup' => print_r(json_decode($item->value, TRUE), 1),
       ];
 
       $elements[$delta] = $view_value;

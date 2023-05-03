@@ -17,7 +17,6 @@ class OpenyModulesListForm extends ModulesListForm {
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
 
-
     $form['filters'] = [
       '#type' => 'container',
       '#attributes' => [
@@ -47,7 +46,7 @@ class OpenyModulesListForm extends ModulesListForm {
       }
       $name = $package["name"];
       $form['modules'][$key][$name] = $this->buildPackageRow($package);
-      $form['modules'][$key][$name] ['#parents'] = ['modules', $key];
+      $form['modules'][$key][$name]['#parents'] = ['modules', $key];
     }
 
     // Add a wrapper around every package.
@@ -68,13 +67,12 @@ class OpenyModulesListForm extends ModulesListForm {
       '#button_type' => 'primary',
     ];
 
-    // TODO: Also, before component removing - would be nice to add a step
+    // @todo Also, before component removing - would be nice to add a step
     // with a list of entities and where they are used ( for paragraps ) to
     // let content managers check all will be good after removal.
     // Just a simple table with a list of view/edit.
     return $form;
   }
-
 
   /**
    * Builds a table row for the OpenY packages  page.
@@ -154,7 +152,8 @@ class OpenyModulesListForm extends ModulesListForm {
           '%name' => $packages_to_install[0],
           '%names' => implode(', ', $packages_to_install),
         ]));
-      } catch (PreExistingConfigException $e) {
+      }
+      catch (PreExistingConfigException $e) {
         $config_objects = $e->flattenConfigObjects($e->getConfigObjects());
         $messenger->addMessage(
           $this->formatPlural(
@@ -166,13 +165,14 @@ class OpenyModulesListForm extends ModulesListForm {
               '@extension' => $modules_to_install[$e->getExtension()],
             ]),
           'error'
-        );
+              );
         return;
-      } catch (UnmetDependenciesException $e) {
+      }
+      catch (UnmetDependenciesException $e) {
         $messenger->addMessage(
           $e->getTranslatedMessage($this->getStringTranslation(), $modules_to_install[$e->getExtension()]),
           'error'
-        );
+              );
         return;
       }
     }
@@ -187,4 +187,5 @@ class OpenyModulesListForm extends ModulesListForm {
   protected function getPackages() {
     return ConfigureProfileForm::getPackages();
   }
+
 }

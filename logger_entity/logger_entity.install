@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Install file for Logger Entity module.
@@ -40,20 +41,20 @@ function logger_entity_update_8001() {
   $new_name_field = BaseFieldDefinition::create('string')
     ->setLabel(t('Name'))
     ->setDescription(t('The name of the Logger Entity entity.'))
-    ->setSettings(array(
+    ->setSettings([
       'max_length' => 250,
       'text_processing' => 0,
-    ))
+    ])
     ->setDefaultValue('')
-    ->setDisplayOptions('view', array(
+    ->setDisplayOptions('view', [
       'label' => 'above',
       'type' => 'string',
       'weight' => -4,
-    ))
-    ->setDisplayOptions('form', array(
+    ])
+    ->setDisplayOptions('form', [
       'type' => 'string_textfield',
       'weight' => -4,
-    ))
+    ])
     ->setDisplayConfigurable('form', TRUE)
     ->setDisplayConfigurable('view', TRUE);
   // Install the new definition.
@@ -61,8 +62,8 @@ function logger_entity_update_8001() {
   // Put the old records back.
   foreach ($results as $result) {
     $query = \Drupal::database()->insert('logger_entity');
-    $query->fields(array_keys((array)$result));
-    $query->values((array)$result);
+    $query->fields(array_keys((array) $result));
+    $query->values((array) $result);
     $query->execute();
   }
 }

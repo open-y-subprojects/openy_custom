@@ -6,7 +6,6 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
-use Drupal\openy_calc\DataWrapperInterface;
 use Drupal\openy_socrates\OpenySocratesFacade;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -137,7 +136,7 @@ class CalcBlockForm extends FormBase {
           '#type' => 'calc_radios',
           '#title' => $this->t('Which option best describes the type of membership you need?'),
           '#options' => $types_options,
-          '#default_value' => isset($storage['type']) ? $storage['type'] : NULL,
+          '#default_value' => $storage['type'] ?? NULL,
         ];
         break;
 
@@ -156,7 +155,7 @@ class CalcBlockForm extends FormBase {
           '#type' => 'radios',
           '#title' => $this->t('Location'),
           '#options' => $locations_options,
-          '#default_value' => isset($storage['location']) ? $storage['location'] : NULL,
+          '#default_value' => $storage['location'] ?? NULL,
         ];
         break;
 
@@ -182,7 +181,7 @@ class CalcBlockForm extends FormBase {
         '#submit' => [[$this, 'navButtonSubmit']],
         '#ajax' => $this->getAjaxDefaults(),
         '#attributes' => [
-          'class' => ['btn', 'blue', 'pull-left']
+          'class' => ['btn', 'blue', 'pull-left'],
         ],
       ];
       $form['#attached']['library'][] = 'openy_calc/submit';
@@ -196,7 +195,7 @@ class CalcBlockForm extends FormBase {
         '#submit' => [[$this, 'navButtonSubmit']],
         '#ajax' => $this->getAjaxDefaults(),
         '#attributes' => [
-          'class' => ['btn', 'blue', 'pull-right']
+          'class' => ['btn', 'blue', 'pull-right'],
         ],
       ];
     }
@@ -209,7 +208,7 @@ class CalcBlockForm extends FormBase {
             'btn',
             'complete-registration',
             'pull-right',
-          ]
+          ],
         ],
       ];
     }
@@ -230,14 +229,14 @@ class CalcBlockForm extends FormBase {
       $storage['type'] = $form_state->getValue('type');
     }
     $form_state->setStorage($storage);
-    
-    # Google Translate kills the submit button, so we detect a submit with `op`.
-    # We can't check the value because it will be translated on the front-end,
-    # but `op` is only set when the final `submit` is clicked.
+
+    // Google Translate kills the submit button, so we detect a submit with `op`.
+    // We can't check the value because it will be translated on the front-end,
+    // but `op` is only set when the final `submit` is clicked.
     if (isset($_POST["op"])) {
       $this->submitForm($form, $form_state);
     }
-    # If not a final submit, then go on to the next step.
+    // If not a final submit, then go on to the next step.
     else {
       $form_state->setRebuild();
     }

@@ -64,11 +64,11 @@ class OpenyModulesUninstallConfirmForm extends ModulesUninstallConfirmForm {
     // Clear the key value store entry.
     $account = $this->currentUser()->id();
     $this->keyValueExpirable->delete($account);
-    $this->keyValueExpirable->delete($account. '_packages');
+    $this->keyValueExpirable->delete($account . '_packages');
     // Uninstall the modules.
     $this->moduleInstaller->uninstall($this->modules);
     $messenger->addMessage($this->t('The selected packages have been uninstalled.'));
-    // Set redirect to project uninstall page
+    // Set redirect to project uninstall page.
     $form_state->setRedirect('openy_system.modules_uninstall');
   }
 

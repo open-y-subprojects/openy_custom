@@ -36,11 +36,11 @@ class OpenyGoogleSearchHelperService {
    * Constructs a new OpenyGoogleSearchHelperService object.
    *
    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
-   *  The langUAGE MANAGER
+   *   The langUAGE MANAGER.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   *  The config factory.
+   *   The config factory.
    * @param \Drupal\path_alias\AliasManagerInterface $alias_manager
-   *  The path alias manager
+   *   The path alias manager.
    */
   public function __construct(LanguageManagerInterface $language_manager, ConfigFactoryInterface $config_factory, AliasManagerInterface $alias_manager) {
     $this->languageManager = $language_manager;

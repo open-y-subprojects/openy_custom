@@ -36,7 +36,7 @@ class CustomHoursWidgetDefault extends WidgetBase {
     $element['hours_label'] = [
       '#title' => t('Custom hours label'),
       '#type' => 'textfield',
-      '#default_value' => isset($item->hours_label) ? $item->hours_label : '',
+      '#default_value' => $item->hours_label ?? '',
       '#description' => t('To remove entire section clear this field and click Save.'),
     ];
 
@@ -45,7 +45,7 @@ class CustomHoursWidgetDefault extends WidgetBase {
       $hours = [
         '#title' => t('%day', ['%day' => ucfirst($day)]),
         '#type' => 'textfield',
-        '#default_value' => isset($item->{$name}) ? $item->{$name} : '',
+        '#default_value' => $item->{$name} ?? '',
         '#placeholder' => t('Example: 9am - 10pm'),
       ];
       $element['hours_' . $day] = $hours;

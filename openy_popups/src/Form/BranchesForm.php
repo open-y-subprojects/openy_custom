@@ -10,7 +10,6 @@ use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Cookie;
 
-
 /**
  * Contribute form.
  */
@@ -33,7 +32,7 @@ class BranchesForm extends FormBase {
   /**
    * Creates a new BranchSessionsForm.
    *
-   * @param EntityTypeManagerInterface $entity_type_manager
+   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
    *   The EntityTypeManager.
    */
   public function __construct(EntityTypeManagerInterface $entity_type_manager) {
@@ -82,6 +81,9 @@ class BranchesForm extends FormBase {
     return $form;
   }
 
+  /**
+   *
+   */
   public static function buildBranch($default = 'All', $branches_list) {
     return [
       '#type' => 'radios',
@@ -105,7 +107,7 @@ class BranchesForm extends FormBase {
     $destination['query']['location'] = $branch;
     $uri = \Drupal::request()->getUriForPath($destination['path']);
     $response = new RedirectResponse($uri . '?' . UrlHelper::buildQuery($destination['query']));
-    $response->headers->setCookie(new Cookie('openy_preferred_branch', $branch, strtotime('+1 day'), '/', null, false, false));
+    $response->headers->setCookie(new Cookie('openy_preferred_branch', $branch, strtotime('+1 day'), '/', NULL, FALSE, FALSE));
     $response->send();
   }
 
@@ -125,7 +127,7 @@ class BranchesForm extends FormBase {
       $query->innerJoin('node__field_class_activity', 'fa', 'fc.field_session_class_target_id = fa.entity_id');
       $query->innerJoin('node_field_data', 'fda', 'fa.field_class_activity_target_id = fda.nid');
       $query->condition('fda.status', 1);
-      // Field on Activity that has Programs Subcategory
+      // Field on Activity that has Programs Subcategory.
       $query->innerJoin('node__field_activity_category', 'fps', 'fa.field_class_activity_target_id = fps.entity_id');
       $query->innerJoin('node_field_data', 'fds', 'fa.field_class_activity_target_id = fda.nid');
       // Field on Session that has Location.
@@ -148,7 +150,7 @@ class BranchesForm extends FormBase {
   /**
    * Get Locations list.
    */
-  public static function getLocations($locations_to_be_displayed = null) {
+  public static function getLocations($locations_to_be_displayed = NULL) {
     $db = \Drupal::database();
     $branches_list = [
       'branch' => [],

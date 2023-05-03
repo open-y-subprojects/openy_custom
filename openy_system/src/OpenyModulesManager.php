@@ -267,7 +267,6 @@ class OpenyModulesManager {
     return $operation_success;
   }
 
-
   /**
    * Destroy database migration data for migrations dependent from module.
    *

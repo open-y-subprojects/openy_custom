@@ -8,7 +8,7 @@ use Drupal\openy_home_branch\HomeBranchLibraryBase;
 /**
  * Defines the home branch library plugin for location finder paragraph.
  *
- * TODO: add get js settings method.
+ * @todo add get js settings method.
  *
  * @HomeBranchLibrary(
  *   id="hb_location_finder",
