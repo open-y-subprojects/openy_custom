@@ -1,3 +1,7 @@
+<?php
+
+namespace Drupal\openy_system\EventSubscriber;
+
 use Drupal\Core\Url;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\KernelEvents;
