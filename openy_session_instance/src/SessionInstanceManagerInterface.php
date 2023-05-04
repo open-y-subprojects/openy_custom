@@ -3,7 +3,6 @@
 namespace Drupal\openy_session_instance;
 
 use Drupal\node\NodeInterface;
-use Drupal\openy_session_instance\Entity\SessionInstance;
 
 /**
  * Interface SessionInstanceManagerInterface.
@@ -66,7 +65,7 @@ interface SessionInstanceManagerInterface {
   /**
    * Fetches sessions schedule.
    *
-   * @param NodeInterface $node
+   * @param \Drupal\node\NodeInterface $node
    *   The session node.
    *
    * @return array
@@ -77,7 +76,7 @@ interface SessionInstanceManagerInterface {
   /**
    * Calculates session instances timestamps for the session.
    *
-   * @param NodeInterface $node
+   * @param \Drupal\node\NodeInterface $node
    *   The session node.
    * @param int|null $timestamp
    *   The earliest allowed session instance.
@@ -107,7 +106,7 @@ interface SessionInstanceManagerInterface {
    * @param int $to
    *   The latest possible occurrence.
    *
-   * @return SessionInstance|null
+   * @return \Drupal\openy_session_instance\Entity\SessionInstance|null
    *   The session instance or null.
    */
   public function getClosestUpcomingSessionInstanceBySession(NodeInterface $node, $from = NULL, $to = NULL);

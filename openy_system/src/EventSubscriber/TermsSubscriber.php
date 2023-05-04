@@ -11,7 +11,7 @@ use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 /**
- * Class TermsSubscriber
+ * Class TermsSubscriber.
  *
  * @package Drupal\openy_system\EventSubscriber
  */
@@ -27,6 +27,9 @@ class TermsSubscriber implements EventSubscriberInterface {
    */
   protected $currentUser;
 
+  /**
+   *
+   */
   public function __construct(ConfigFactoryInterface $config_factory, AccountInterface $current_user) {
     $this->config = $config_factory->get('openy.terms_and_conditions.schema');
     $this->currentUser = $current_user;
@@ -58,7 +61,7 @@ class TermsSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public static function getSubscribedEvents() {
-    $events[KernelEvents::REQUEST][] = array('checkForRedirection');
+    $events[KernelEvents::REQUEST][] = ['checkForRedirection'];
     return $events;
   }
 

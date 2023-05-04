@@ -29,24 +29,24 @@ class HolidayHoursWidget extends WidgetBase {
     $element['holiday'] = [
       '#title' => t('Holiday title'),
       '#type' => 'textfield',
-      '#default_value' => isset($item->holiday) ? $item->holiday : '',
+      '#default_value' => $item->holiday ?? '',
       '#description' => t('Example: Thanksgiving Day. To remove entire section clear this field and hit Save'),
     ];
 
     $element['hours'] = [
       '#title' => t('Holiday hours'),
       '#type' => 'textfield',
-      '#default_value' => isset($item->hours) ? $item->hours : '',
+      '#default_value' => $item->hours ?? '',
       '#description' => t('Example: 1pm - 2pm'),
     ];
 
     // Set default value.
-    $element['date'] = array(
+    $element['date'] = [
       '#type' => 'datetime',
       '#title' => t('Date'),
       '#default_value' => isset($item->date) ? DrupalDateTime::createFromTimestamp($item->date) : '',
       '#date_time_element' => 'none',
-    );
+    ];
 
     return $element;
   }

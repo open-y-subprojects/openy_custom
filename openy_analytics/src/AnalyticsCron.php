@@ -15,7 +15,7 @@ use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
 use Drupal\Core\Utility\Error;
 
 /**
- * Class AnalyticsCron
+ * Class AnalyticsCron.
  *
  * @package Drupal\openy_analytics
  */
@@ -96,11 +96,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns last changed node information
+   * Returns last changed node information.
    *
    * @return mixed
    */
-  function getLastChangedNode() {
+  public function getLastChangedNode() {
     $statement = $this->database->select('node_field_data')
       ->fields('node_field_data', ['type', 'langcode', 'status', 'changed'])
       ->orderBy('changed', 'DESC')
@@ -109,11 +109,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns server, php and db versions
+   * Returns server, php and db versions.
    *
    * @return array
    */
-  function getServerInfo() {
+  public function getServerInfo() {
     $db_version = $this->database->query('select version();')->fetchField();
     $db_detailed_version = $this->database->query("SHOW VARIABLES LIKE '%version%';")
       ->fetchAllKeyed();
@@ -130,11 +130,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns current theme and base theme
+   * Returns current theme and base theme.
    *
    * @return array
    */
-  function getThemeInfo() {
+  public function getThemeInfo() {
     $default_theme = $this->configFactory->get('system.theme')->get('default');
     $base_theme = \Drupal::service('theme_handler')
       ->listInfo()[$default_theme]->base_theme;
@@ -146,11 +146,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns array of enabled modules with their versions
+   * Returns array of enabled modules with their versions.
    *
    * @return array
    */
-  function getEnabledModules() {
+  public function getEnabledModules() {
     $all_modules = $this->extensionListModule->getList();
 
     $modules = [
@@ -160,6 +160,9 @@ class AnalyticsCron {
       'profile' => '',
     ];
 
+    /**
+     * Helper function for search.
+     */
     function string_contains($needle, $haystack) {
       return strpos($haystack, $needle) !== FALSE;
     }
@@ -194,12 +197,14 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns array of paragraph bundles used on homepage
+   * Returns array of paragraph bundles used on homepage.
+   *
    * @return array
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  function getFrontpageParagraphs() {
+  public function getFrontpageParagraphs() {
     $front_page = $this->configFactory->get('system.site')->get('page.front');
     $front_page = explode('/', $front_page);
     $nid = end($front_page);
@@ -226,12 +231,14 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns array of fields allowed paragraphs settings
+   * Returns array of fields allowed paragraphs settings.
+   *
    * @return array
+   *
    * @throws \Drupal\Component\Plugin\Exception\InvalidPluginDefinitionException
    * @throws \Drupal\Component\Plugin\Exception\PluginNotFoundException
    */
-  function getLandingPageParagraphsAllowedSettings() {
+  public function getLandingPageParagraphsAllowedSettings() {
     $front_page = $this->configFactory->get('system.site')->get('page.front');
     $front_page = explode('/', $front_page);
     $nid = end($front_page);
@@ -256,7 +263,7 @@ class AnalyticsCron {
       $target_bundles = $settings['handler_settings']['target_bundles'];
       $node_fields_settings[$field_id] = [
         $negate,
-        $target_bundles
+        $target_bundles,
       ];
     }
 
@@ -264,11 +271,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns statistics of paragraphs used on the site
+   * Returns statistics of paragraphs used on the site.
    *
    * @return array
    */
-  function getParagraphsUsage() {
+  public function getParagraphsUsage() {
     $statement = $this->database->select('paragraphs_item')
       ->fields('paragraphs_item', ['type'])
       ->groupBy('type')
@@ -294,11 +301,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Returns statistics of content type bundles used on the site
+   * Returns statistics of content type bundles used on the site.
    *
    * @return mixed
    */
-  function getContentTypeBundleUsage() {
+  public function getContentTypeBundleUsage() {
     $statement = $this->database->select('node_field_data')
       ->fields('node_field_data', ['type'])
       ->condition('status', 1)
@@ -311,11 +318,11 @@ class AnalyticsCron {
   }
 
   /**
-   * Checks is site owner agreed to collect analytics
+   * Checks is site owner agreed to collect analytics.
    *
    * @return bool
    */
-  function isEnabled() {
+  public function isEnabled() {
     $analytics_enabled = $this->configFactory->get('openy.terms_and_conditions.schema')
       ->get('analytics');
 
@@ -328,7 +335,7 @@ class AnalyticsCron {
   }
 
   /**
-   * @inheritDoc
+   * {@inheritDoc}
    */
   public function runCronServices() {
     if (!$this->isEnabled()) {
@@ -348,7 +355,7 @@ class AnalyticsCron {
         'content_type_bundle_usage' => $this->getContentTypeBundleUsage(),
       ];
 
-      $json = json_encode($data, true);
+      $json = json_encode($data, TRUE);
 
       $response = $this->httpClient->post($this->endpoint, [
         'body' => $json,
@@ -357,7 +364,8 @@ class AnalyticsCron {
           'Content-Type' => 'application/json',
         ],
       ]);
-    } catch (\Exception $e) {
+    }
+    catch (\Exception $e) {
       $message = '%type: @message in %function (line %line of %file).';
       $variables = Error::decodeException($e);
       $this->loggerFactory->get('openy_analytics')

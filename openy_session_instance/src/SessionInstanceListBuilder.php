@@ -32,7 +32,7 @@ class SessionInstanceListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\openy_session_instance\Entity\SessionInstance */
+    /** @var \Drupal\openy_session_instance\Entity\SessionInstance $entity */
     $row['id'] = $entity->id();
     $row['name'] = Link::fromTextAndUrl(
       $entity->label(),

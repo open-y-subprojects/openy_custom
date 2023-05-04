@@ -11,7 +11,7 @@ use Drupal\entity_browser\Element\EntityBrowserElement;
 /**
  * Provides helpers for adding an entity browser element to a form.
  *
- * Source - https://git.drupalcode.org/project/helper/blob/8.x-1.x/src/EntityBrowserFormTrait.php
+ * Source - https://git.drupalcode.org/project/helper/blob/8.x-1.x/src/EntityBrowserFormTrait.php.
  */
 trait EntityBrowserFormTrait {
 
@@ -103,7 +103,7 @@ trait EntityBrowserFormTrait {
     $storage = [];
     $entities = [];
     foreach ($ids as $id) {
-      list($entity_type_id, $entity_id) = explode(':', $id);
+      [$entity_type_id, $entity_id] = explode(':', $id);
       if (!isset($storage[$entity_type_id])) {
         $storage[$entity_type_id] = \Drupal::entityTypeManager()->getStorage($entity_type_id);
       }

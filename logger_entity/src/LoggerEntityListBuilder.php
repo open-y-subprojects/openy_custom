@@ -27,14 +27,14 @@ class LoggerEntityListBuilder extends EntityListBuilder {
    * {@inheritdoc}
    */
   public function buildRow(EntityInterface $entity) {
-    /* @var $entity \Drupal\logger_entity\Entity\LoggerEntity */
+    /** @var \Drupal\logger_entity\Entity\LoggerEntity $entity */
     $row['id'] = $entity->id();
     $row['name'] = Link::fromTextAndUrl(
       $entity->label(),
       new Url(
-        'entity.logger_entity.edit_form', array(
+        'entity.logger_entity.edit_form', [
           'logger_entity' => $entity->id(),
-        )
+        ]
       )
     );
     return $row + parent::buildRow($entity);

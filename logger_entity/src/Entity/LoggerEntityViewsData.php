@@ -16,29 +16,29 @@ class LoggerEntityViewsData extends EntityViewsData implements EntityViewsDataIn
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['logger_entity']['table']['base'] = array(
+    $data['logger_entity']['table']['base'] = [
       'field' => 'id',
       'title' => $this->t('Logger Entity'),
       'help' => $this->t('The Logger Entity ID.'),
-    );
+    ];
 
-    $data['logger_entity']['data'] = array(
+    $data['logger_entity']['data'] = [
       'title' => t('Data'),
       'help' => t('The data in a serialized format.'),
-      'field' => array(
+      'field' => [
         'id' => 'serialized',
         'click sortable' => FALSE,
-      ),
-      'argument' => array(
+      ],
+      'argument' => [
         'id' => 'string',
-      ),
-      'filter' => array(
+      ],
+      'filter' => [
         'id' => 'string',
-      ),
-      'sort' => array(
+      ],
+      'sort' => [
         'id' => 'standard',
-      ),
-    );
+      ],
+    ];
 
     return $data;
   }

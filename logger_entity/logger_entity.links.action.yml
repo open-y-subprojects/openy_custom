@@ -8,4 +8,3 @@ entity.logger_entity_type.add_form:
   title: 'Add Logger Entity type'
   appears_on:
     - entity.logger_entity_type.collection
-

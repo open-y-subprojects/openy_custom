@@ -16,11 +16,11 @@ class SessionInstanceViewsData extends EntityViewsData implements EntityViewsDat
   public function getViewsData() {
     $data = parent::getViewsData();
 
-    $data['session_instance']['table']['base'] = array(
+    $data['session_instance']['table']['base'] = [
       'field' => 'id',
       'title' => $this->t('Session Instance'),
       'help' => $this->t('The Session Instance ID.'),
-    );
+    ];
 
     return $data;
   }

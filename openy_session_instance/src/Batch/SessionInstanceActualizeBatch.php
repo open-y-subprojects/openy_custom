@@ -10,9 +10,9 @@ class SessionInstanceActualizeBatch {
   /**
    * Batch process sessions instance actualization.
    *
-   * @param $session_ids array
+   * @param array $session_ids
    *   Session IDs array.
-   * @param $context array
+   * @param array $context
    *   Context array.
    */
   public static function run($session_ids, &$context) {
@@ -40,11 +40,11 @@ class SessionInstanceActualizeBatch {
   /**
    * Batch finalization sessions instance actualization.
    *
-   * @param $success bool
+   * @param bool $success
    *   A boolean indicating whether the batch has completed successfully.
-   * @param $results array
+   * @param array $results
    *   The value set in $context['results'] by callback_batch_operation().
-   * @param $operations array
+   * @param array $operations
    *   If $success is FALSE, contains the operations that remained unprocessed.
    */
   public static function finished($success, $results, $operations) {
@@ -58,10 +58,10 @@ class SessionInstanceActualizeBatch {
       // An error occurred.
       $error_operation = reset($operations);
       $message = t('An error occurred while processing %error_operation with arguments: @arguments',
-        array(
+        [
           '%error_operation' => $error_operation[0],
-          '@arguments' => print_r($error_operation[1], TRUE)
-        ));
+          '@arguments' => print_r($error_operation[1], TRUE),
+        ]);
       $messenger->addMessage($message, 'error');
     }
   }

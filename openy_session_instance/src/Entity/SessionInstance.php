@@ -5,7 +5,6 @@ namespace Drupal\openy_session_instance\Entity;
 use Drupal\Core\Entity\EntityStorageInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Entity\ContentEntityBase;
-use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 
 /**
@@ -168,12 +167,12 @@ class SessionInstance extends ContentEntityBase implements SessionInstanceInterf
         else {
           // M j - j, Y.
           $day_to = date('j', $timestamp_to);
-          $formatted_date =  "$month_day_start - $day_to, $year_start";
+          $formatted_date = "$month_day_start - $day_to, $year_start";
         }
       }
       else {
         // M j - M j, Y.
-        $formatted_date =  "$month_day_start - $month_day_to, $year_start";
+        $formatted_date = "$month_day_start - $month_day_to, $year_start";
       }
     }
     else {
@@ -220,43 +219,43 @@ class SessionInstance extends ContentEntityBase implements SessionInstanceInterf
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'))
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'timestamp',
         'weight' => 0,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'datetime_timestamp',
         'weight' => 10,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['timestamp'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('From'))
       ->setDescription(t('The time that the Session Instance begins.'))
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'timestamp',
         'weight' => 0,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'datetime_timestamp',
         'weight' => 10,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['timestamp_to'] = BaseFieldDefinition::create('timestamp')
       ->setLabel(t('To'))
       ->setDescription(t('The time that the Session Instance ends.'))
-      ->setDisplayOptions('view', array(
+      ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'timestamp',
         'weight' => 0,
-      ))
-      ->setDisplayOptions('form', array(
+      ])
+      ->setDisplayOptions('form', [
         'type' => 'datetime_timestamp',
         'weight' => 10,
-      ))
+      ])
       ->setDisplayConfigurable('form', TRUE);
 
     $fields['session'] = BaseFieldDefinition::create('entity_reference')

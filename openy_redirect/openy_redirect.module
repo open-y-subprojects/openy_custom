@@ -5,6 +5,7 @@
  * Module file.
  */
 
+use Drupal\node\NodeInterface;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\Core\Field\BaseFieldDefinition;
 use Drupal\Core\Form\FormStateInterface;
@@ -53,7 +54,7 @@ function openy_redirect_form_node_form_alter(&$form, FormStateInterface $form_st
   // Add custom submit to create redirects.
   $form['actions']['submit']['#submit'][] = 'openy_redirect_submit';
 
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     $language = $node->language()->getId();
 
     // Set default values.
@@ -62,20 +63,21 @@ function openy_redirect_form_node_form_alter(&$form, FormStateInterface $form_st
     $redirects = openy_redirect_load_redirects_by_redirect_uri($redirect_url, $language);
 
     $i = 0;
-    /** @var Redirect $item */
+    /** @var \Drupal\redirect\Entity\Redirect $item */
     foreach ($redirects as $item) {
       $source = $item->getSource();
       $options = !empty($source['query']) ? $source['query'] : [];
 
       if ($i > 0) {
-        $form['redirect']['widget'][$i] = $form['redirect']['widget'][$i-1];
+        $form['redirect']['widget'][$i] = $form['redirect']['widget'][$i - 1];
       }
 
       try {
         $url = Url::fromUserInput('/' . ltrim($source['path'], '/'), $options)->toString();
         $form['redirect']['widget'][$i]['value']['#default_value'] = $url;
 
-      } catch (\InvalidArgumentException $e) {
+      }
+      catch (\InvalidArgumentException $e) {
         \Drupal::messenger()->addMessage(t('Redirect changes not saved because: ') . $e->getMessage(), 'error');
       }
 
@@ -102,13 +104,13 @@ function openy_redirect_submit($form, FormStateInterface $form_state) {
   $messenger = \Drupal::messenger();
   $node = \Drupal::routeMatch()->getParameter('node');
   $language = Language::LANGCODE_NOT_SPECIFIED;
-  if ($node instanceof \Drupal\node\NodeInterface) {
+  if ($node instanceof NodeInterface) {
     $language = $node->language()->getId();
   }
   else {
     $nid = $form_state->getStorage()['nid'];
     $node_storage = \Drupal::entityTypeManager()
-    ->getStorage('node');
+      ->getStorage('node');
 
     // Load a single node.
     $node = $node_storage->load($nid);
@@ -122,7 +124,7 @@ function openy_redirect_submit($form, FormStateInterface $form_state) {
   // Delete all redirects for this node to save it from scratch later.
   $redirects = openy_redirect_load_redirects_by_redirect_uri($redirect_url, $language);
   if (!empty($redirects)) {
-    /** @var Redirect $item */
+    /** @var \Drupal\redirect\Entity\Redirect $item */
     foreach ($redirects as $item) {
       $item->delete();
     }
@@ -142,7 +144,8 @@ function openy_redirect_submit($form, FormStateInterface $form_state) {
       $redirect->setLanguage($language);
       $redirect->setStatusCode(\Drupal::config('redirect.settings')->get('default_status_code'));
       $redirect->save();
-    } else {
+    }
+    else {
       $messenger->addMessage(t('Redirect for "@source" already exists', ['@source' => $item['value']]));
     }
   }
