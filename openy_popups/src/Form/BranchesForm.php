@@ -82,7 +82,7 @@ class BranchesForm extends FormBase {
   }
 
   /**
-   *
+   * Create popup for branch selection.
    */
   public static function buildBranch($default = 'All', $branches_list) {
     return [

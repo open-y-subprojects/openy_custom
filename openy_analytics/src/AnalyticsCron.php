@@ -161,7 +161,7 @@ class AnalyticsCron {
     ];
 
     /**
-     *
+     * Helper function for search.
      */
     function string_contains($needle, $haystack) {
       return strpos($haystack, $needle) !== FALSE;
