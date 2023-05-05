@@ -3,7 +3,8 @@
   "description": "Custom core modules for Open Y distrubution.",
   "type": "drupal-module",
   "require": {
-    "ymcatwincities/openy": "*"
+    "ymcatwincities/openy": "*",
+    "twig/twig": "^2.7 || ^3.0"
   },
   "license": "GPL-2.0+",
   "minimum-stability": "dev"
