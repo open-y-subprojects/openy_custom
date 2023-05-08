@@ -160,6 +160,7 @@ function openy_redirect_load_redirects_by_redirect_uri($redirect_uri, $language 
   $redirectIds = $entityTypeManager->getStorage('redirect')->getQuery()
     ->condition('redirect_redirect__uri', $redirect_uri)
     ->condition('language', $language)
+    ->accessCheck(FALSE)
     ->execute();
 
   return Redirect::loadMultiple($redirectIds);
