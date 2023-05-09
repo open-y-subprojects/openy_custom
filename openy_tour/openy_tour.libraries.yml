@@ -4,4 +4,4 @@ openy-tour:
     js/openy_tour.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once

@@ -6,7 +6,7 @@
 /**
  * @file generic.js
  */
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, Cookies) {
   "use strict";
 
   /**
@@ -15,7 +15,7 @@
   Drupal.behaviors.openy_hf = {
     attach: function (context) {
       var cookie_name = 'openy_fh_dnr';
-      var cookie = $.cookie(cookie_name);
+      var cookie = Cookies.get(cookie_name);
       var query = getUrlVars();
 
       // Quickly render the page if there is no query & cookies without cookies being set.
@@ -27,7 +27,7 @@
       // Reset any settings if we 'reset' parameter.
       if (query.dnr == 'reset') {
         doFullRender();
-        $.removeCookie(cookie_name);
+        Cookies.remove(cookie_name);
         return;
       }
 
@@ -83,7 +83,7 @@
         if (cookie === undefined) {
           var date = new Date();
           date.setTime(date.getTime() + (drupalSettings['openy_hf.cookieLifeTime'] * 1000));
-          $.cookie(cookie_name, param, { expires: date });
+          Cookies.set(cookie_name, param, { expires: date });
         }
       }
 
@@ -114,4 +114,4 @@
     }
   };
 
-}(jQuery, Drupal, drupalSettings));
+}(jQuery, Drupal, drupalSettings, window.Cookies));
