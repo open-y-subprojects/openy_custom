@@ -71,7 +71,7 @@ function openy_ckeditor_tokens($type, $tokens, array $data, array $options, Bubb
             '#amenities_open' => _openy_ckeditor_prepare_amenities_view($amenities_values),
             '#amenities_closed' => $has_closed ? _openy_ckeditor_prepare_amenities_view($closed_amenities_values) : [],
           ];
-          $replacements[$original] = render($render_array);
+          $replacements[$original] = \Drupal::service('renderer')->render($render_array);
           break;
       }
     }
