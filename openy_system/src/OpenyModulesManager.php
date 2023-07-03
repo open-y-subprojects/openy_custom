@@ -216,7 +216,7 @@ class OpenyModulesManager {
               '@config_entity_type' => $config_entity_type,
               '@bundle' => $bundle,
               '@ids' => implode(', ', $ids),
-              '@parentEntity' => render($link),
+              '@parentEntity' => \Drupal::service('renderer')->render($link),
               '@removeBundle' => $this->getLink($config_entity_type, 'delete config entity', $bundle),
             ], RfcLogLevel::NOTICE);
             $operation_success = FALSE;
@@ -356,7 +356,7 @@ class OpenyModulesManager {
     }
 
     $link = Link::fromTextAndUrl($link_text, $url)->toRenderable();
-    return render($link);
+    return \Drupal::service('renderer')->render($link);
   }
 
   /**

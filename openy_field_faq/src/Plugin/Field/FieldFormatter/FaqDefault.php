@@ -32,7 +32,7 @@ class FaqDefault extends FormatterBase {
       $elements[$delta] = [
         '#theme' => 'openy_faq_item',
         '#question' => $item->question,
-        '#answer' => render($answer),
+        '#answer' => \Drupal::service('renderer')->render($answer),
       ];
     }
 
