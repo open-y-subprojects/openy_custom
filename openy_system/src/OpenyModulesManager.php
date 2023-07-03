@@ -141,7 +141,8 @@ class OpenyModulesManager {
       $query = $this->entityTypeManager
         ->getStorage($content_entity_type)
         ->getQuery('AND')
-        ->condition($field, $bundle);
+        ->condition($field, $bundle)
+        ->accessCheck(FALSE);
 
       $ids = $query->execute();
       $content_removed = $this->removeContent($content_entity_type, $config_entity_type, $bundle, $ids);
@@ -157,7 +158,7 @@ class OpenyModulesManager {
           $config_entity_type_bundle->delete();
         }
         catch (\Exception $e) {
-          watchdog_exception('openy', $e, "Error! Can't delete config entity 
+          watchdog_exception('openy', $e, "Error! Can't delete config entity
           @config_entity_type bundle <b>@bundle</b>, please @remove.", [
             '@config_entity_type' => $config_entity_type,
             '@bundle' => $bundle,
@@ -250,7 +251,7 @@ class OpenyModulesManager {
           $storage_handler->delete($entities);
         }
         catch (\Exception $e) {
-          watchdog_exception('openy', $e, "Error! Can't delete content related 
+          watchdog_exception('openy', $e, "Error! Can't delete content related
           to @entity_type bundle <b>@bundle</b>, please @removeContent (Entity ID's - @ids).<br>
           After this @removeBundle @config_entity_type bundle <b>@bundle</b>.", [
             '@entity_type' => $content_entity_type,

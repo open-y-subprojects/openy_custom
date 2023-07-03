@@ -88,6 +88,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
     $result = $this->entityTypeManager
       ->getStorage('session_instance')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->execute();
     if (empty($result)) {
       return;
@@ -118,6 +119,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
     $ids = $this->entityTypeManager
       ->getStorage('session_instance')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->condition('session', $node->id())
       ->execute();
 
@@ -385,6 +387,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
     $query = $this->entityTypeManager
       ->getStorage('session_instance')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->condition('session', $node->id())
       ->sort('timestamp')
       ->range(0, 1);
@@ -437,6 +440,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
     $query = $this->entityTypeManager
       ->getStorage('session_instance')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->sort('timestamp');
 
     foreach ($conditions as $key => $value) {
@@ -463,6 +467,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('type', 'program_subcategory')
         ->condition('field_category_program', $conditions['program'], 'IN');
       $program_subcategory_ids = $query->execute();
@@ -476,6 +481,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('type', 'activity');
       if (!empty($conditions['program_subcategory'])) {
         $query->condition('field_activity_category', $conditions['program_subcategory'], 'IN');
@@ -495,6 +501,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('type', 'class');
       if (!empty($conditions['activity'])) {
         $query->condition('field_class_activity', $conditions['activity'], 'IN');
@@ -514,6 +521,7 @@ class SessionInstanceManager implements SessionInstanceManagerInterface {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('type', 'session');
       if (!empty($conditions['class'])) {
         $query->condition('field_session_class', $conditions['class'], 'IN');

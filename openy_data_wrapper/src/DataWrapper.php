@@ -119,6 +119,7 @@ class DataWrapper implements OpenyDataServiceInterface {
     else {
       $location_ids = $this->entityTypeManager->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('type', $type)
         ->condition('status', 1)
         ->execute();
@@ -170,6 +171,7 @@ class DataWrapper implements OpenyDataServiceInterface {
     $types = [];
     $membership_ids = $this->entityTypeManager->getStorage('node')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->condition('type', 'membership')
       ->condition('status', 1)
       ->execute();
@@ -215,6 +217,7 @@ class DataWrapper implements OpenyDataServiceInterface {
 
     $location_ids = $this->entityTypeManager->getStorage('node')
       ->getQuery()
+      ->accessCheck(FALSE)
       ->condition('type', 'branch')
       ->addTag('data_wrapper_locations')
       ->execute();
