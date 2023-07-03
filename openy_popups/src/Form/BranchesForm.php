@@ -107,7 +107,7 @@ class BranchesForm extends FormBase {
     $destination['query']['location'] = $branch;
     $uri = \Drupal::request()->getUriForPath($destination['path']);
     $response = new RedirectResponse($uri . '?' . UrlHelper::buildQuery($destination['query']));
-    $response->headers->setCookie(new Cookie('openy_preferred_branch', $branch, strtotime('+1 day'), '/', NULL, FALSE, FALSE));
+    $response->headers->setCookie(Cookie::create('openy_preferred_branch', $branch, strtotime('+1 day'), '/', NULL, FALSE, FALSE));
     $response->send();
   }
 
