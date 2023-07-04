@@ -160,6 +160,7 @@ class SchedulesSearchForm extends FormBase {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('status', 1)
         ->condition('type', ['branch', 'camp'], 'IN');
       $entity_ids = $query->execute();
@@ -193,6 +194,7 @@ class SchedulesSearchForm extends FormBase {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('status', 1)
         ->condition('type', 'program');
       $entity_ids = $query->execute();
@@ -221,6 +223,7 @@ class SchedulesSearchForm extends FormBase {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('status', 1)
         ->condition('type', 'program_subcategory')
         ->sort('title');
@@ -261,6 +264,7 @@ class SchedulesSearchForm extends FormBase {
       $query = $this->entityTypeManager
         ->getStorage('node')
         ->getQuery()
+        ->accessCheck(FALSE)
         ->condition('status', 1)
         ->condition('type', 'activity')
         ->condition('field_activity_category', $categories_ids, 'IN');
@@ -271,6 +275,7 @@ class SchedulesSearchForm extends FormBase {
         $query = $this->entityTypeManager
           ->getStorage('node')
           ->getQuery()
+          ->accessCheck(FALSE)
           ->condition('status', 1)
           ->condition('type', 'class')
           ->condition('field_class_activity', $activities_ids, 'IN')

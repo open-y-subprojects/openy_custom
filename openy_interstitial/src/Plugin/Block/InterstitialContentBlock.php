@@ -75,6 +75,7 @@ class InterstitialContentBlock extends BlockBase implements ContainerFactoryPlug
     $entity_type_manager = $this->container->get('entity_type.manager');
     /** @var \Drupal\Core\Entity\Query\QueryInterface $query */
     $query = $entity_type_manager->getStorage('node')->getQuery()
+      ->accessCheck(FALSE)
       ->condition('status', 1)
       ->condition('type', 'interstitial_page');
     $query->range(0, 1);
