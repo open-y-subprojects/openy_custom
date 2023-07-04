@@ -39,6 +39,10 @@ function openy_redirect_entity_base_field_info(EntityTypeInterface $entity_type)
  * Implements hook_form_FORM_ID_alter() for node_form().
  */
 function openy_redirect_form_node_form_alter(&$form, FormStateInterface $form_state) {
+  // Do nothing if the field widget is hidden.
+  if (empty($form['redirect'])) {
+    return;
+  }
 
   $node = \Drupal::routeMatch()->getParameter('node');
   // Create the group for the redirect fields.
