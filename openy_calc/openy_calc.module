@@ -48,3 +48,16 @@ function openy_calc_preprocess_fieldset(&$variables) {
     $legend_span->setAttribute('tabindex', '0');
   }
 }
+
+/**
+ * Preprocess input.
+ */
+function openy_calc_preprocess_input(&$variables) {
+  $element = $variables['element'];
+
+  // Set tab index on radios when they are hidden. See
+  // templates/form-element-membership-type.html.twig for display logic.
+  if (isset($element["#type"]) && $element["#type"] == "membership_type_radio" && $element["#title_display"] == 'after') {
+    $variables['attributes']['tabindex'] = '-1';
+  }
+}
