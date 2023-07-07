@@ -308,14 +308,14 @@
                     atcb_link.className = 'atcb-link';
                     atcb_link.innerHTML = atc_button_title;
                     atcb_link.id = atcb_link_id_val;
-                    atcb_link.tabIndex = 1;
+                    atcb_link.tabIndex = 0;
 
                     dom[tagnum].appendChild(atcb_link);
                     dom[tagnum].appendChild(atcb_list);
                 } else {
                     atcb_link = dom[tagnum].querySelector('.atcb-link');
                     atcb_link.parentNode.appendChild(atcb_list);
-                    atcb_link.tabIndex = 1;
+                    atcb_link.tabIndex = 0;
                     if (atcb_link.id == '') {
                         atcb_link.id = atcb_link_id_val;
                     }

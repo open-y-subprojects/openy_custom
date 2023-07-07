@@ -15,6 +15,7 @@ atc_base:
       'assets/addtocalendar-styles-master/atc-base/atc-base.css': {}
   js:
     'assets/addtocalendar-master/addtocalendar.min.js': { minified: true }
+    'assets/js/atc-fix.js': {}
 
 vue:
   version: 2.6.11
