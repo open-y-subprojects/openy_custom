@@ -8,6 +8,15 @@ addtocal:
   js:
     assets/js/atc.js: {}
 
+atc_base:
+  version: 1.5.3
+  css:
+    component:
+      'assets/addtocalendar-styles-master/atc-base/atc-base.css': {}
+  js:
+    'assets/addtocalendar-master/addtocalendar.min.js': { minified: true }
+    'assets/js/atc-fix.js': {}
+
 vue:
   version: 2.6.11
   js:
