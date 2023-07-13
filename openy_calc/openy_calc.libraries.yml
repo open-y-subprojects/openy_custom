@@ -13,6 +13,6 @@ submit:
     js/openy_calc_submit.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
+    - core/once
     - core/drupal
     - core/drupalSettings
