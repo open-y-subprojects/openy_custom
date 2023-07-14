@@ -1,7 +1,7 @@
 /**
  * Functions for after the form has been submitted.
  */
-(function ($) {
+(function (Drupal, $, once) {
   "use strict";
 
   /**
@@ -9,9 +9,10 @@
    */
   Drupal.behaviors.openy_calc_scroll = {
     attach: function (context, settings) {
-      $('#membership-calc-wrapper').once().each(function () {
-        var divPosition = $(this).offset();
-        $('html, body').animate({scrollTop: divPosition.top - 100}, "slow");
+      $(once('openy-calc-scroll', '#membership-calc-wrapper', context))
+        .each(function () {
+          var divPosition = $(this).offset();
+          $('html, body').animate({scrollTop: divPosition.top - 100}, "slow");
       });
     }
   };
@@ -33,4 +34,4 @@
     }
   };
 
-})(jQuery);
+})(Drupal, jQuery, once);
