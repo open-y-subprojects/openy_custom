@@ -3,7 +3,7 @@
  * Cookies storage JavaScript for the Open Y Home Branch module.
  */
 
-(function ($, Drupal, drupalSettings) {
+(function(Drupal, $, drupalSettings, once, cookies) {
 
   "use strict";
 
@@ -80,15 +80,15 @@
     // Move current data to Cookies storage.
     updateStorage: function () {
       $(document).trigger('hb-before-storage-update', this.data);
-      $.cookie('home_branch', JSON.stringify(this.data), { expires: 360, path: drupalSettings.path.baseUrl });
+      cookies.set('home_branch', JSON.stringify(this.data), { expires: 360, path: drupalSettings.path.baseUrl });
       $(document).trigger('hb-after-storage-update', this.data);
     },
 
     // Load data from Cookies storage.
     loadFromStorage: function () {
-      var data = $.cookie('home_branch');
+      var data = cookies.get('home_branch');
       if (data !== undefined) {
-        return JSON.parse($.cookie('home_branch'));
+        return JSON.parse(cookies.get('home_branch'));
       }
       // Return default values if storage not defined.
       return this.data;
@@ -111,11 +111,11 @@
         return;
       }
 
-      $(context).find('body').once('home-branch-cookies-storage').each(function () {
+      $(once('home-branch-cookies-storage', 'body',  context)).each(function () {
         // Init Home Branch Cookies storage on page load.
         Drupal.homeBranch.init();
       });
     }
   };
 
-})(jQuery, Drupal, drupalSettings);
+})(Drupal, jQuery, drupalSettings, once, window.Cookies);
