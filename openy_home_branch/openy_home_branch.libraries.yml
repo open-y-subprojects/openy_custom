@@ -1,13 +1,13 @@
 cookies_storage:
-  version: 0.1
+  version: 0.2
   js:
     js/hb_cookies_storage.js: {}
   dependencies:
     - core/drupal
     - core/drupalSettings
     - core/jquery
-    - core/jquery.once
-    - core/jquery.cookie
+    - core/once
+    - core/js-cookie
 
 hb_plugin_base:
   version: 0.1

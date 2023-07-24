@@ -3,7 +3,7 @@
  * Location finder extension with Home Branch logic.
  */
 
-(function ($, Drupal, drupalSettings) {
+(function ($, Drupal, drupalSettings, once) {
 
   "use strict";
 
@@ -14,7 +14,12 @@
    */
   Drupal.behaviors.openyHomeBranchLocationFinderSort = {
     attach: function (context, settings) {
-      $(document).once().on('hb-location-finder-sort', function (event, el) {
+      if (!once('openyHomeBranchLocationFinderSort', 'html').length) {
+        // Early return avoid changing the indentation
+        // for the rest of the code.
+        return;
+      }
+      $(document).on('hb-location-finder-sort', function (event, el) {
         var items = $(el).find('.views-row');
         items.each(function (index) {
           var weight = $(this).attr('data-hb-sort');
@@ -95,4 +100,4 @@
     }
   });
 
-})(jQuery, Drupal, drupalSettings);
+})(jQuery, Drupal, drupalSettings, once);
