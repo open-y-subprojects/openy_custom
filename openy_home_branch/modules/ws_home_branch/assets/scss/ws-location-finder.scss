@@ -1,0 +1,39 @@
+@import "_functions";
+@import "_mixins";
+@import "_variables";
+
+.block-inline-blocklb-openy-map {
+  .hb-location-checkbox-wrapper {
+    border-color: var(--wsPrimaryColor, blue);
+
+    label {
+      color: var(--wsPrimaryColor, blue);
+
+      &:after {
+        background-image: url('../svg/add_circle_colorway.svg');
+        top: 0;
+      }
+    }
+  }
+
+  .hb-selected {
+    .hb-location-checkbox-wrapper {
+      background-color: var(--wsPrimaryColor, blue);
+
+      label {
+        color: var(--ylb-color-white);
+
+        &:after {
+          background-image: url('../svg/check_circle.svg');
+          right: -54px;
+          top: 3px;
+        }
+      }
+    }
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: center;
+  }
+}
