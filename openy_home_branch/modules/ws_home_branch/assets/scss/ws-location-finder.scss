@@ -12,6 +12,10 @@
       &:after {
         background-image: url('../svg/add_circle_colorway.svg');
         top: 0;
+
+        @include media-breakpoint-down(lg) {
+          top: -9px;
+        }
       }
     }
   }
@@ -27,6 +31,10 @@
           background-image: url('../svg/check_circle.svg');
           right: -54px;
           top: 3px;
+
+          @include media-breakpoint-down(lg) {
+            top: -6px;
+          }
         }
       }
     }
