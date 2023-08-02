@@ -33,10 +33,7 @@ class HBLocSelectorBranchLBPage extends HomeBranchLibraryBase {
   public function isAllowedForAttaching($variables) {
     /** @var \Drupal\node\NodeInterface $node */
     $node = $variables['node'] ?? NULL;
-    if (!$node) {
-      return FALSE;
-    }
-    if (!$node->hasField('layout_builder__layout')) {
+    if (!$node || !$node->hasField('layout_builder__layout')) {
       return FALSE;
     }
     // Skip nodes with optional layout builder usage with deactivated usage.
