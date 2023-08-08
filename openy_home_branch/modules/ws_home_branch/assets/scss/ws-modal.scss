@@ -71,9 +71,10 @@
         font-size: 18px;
         font-family: var(--ylb-font-family-verdana);
         line-height: 26px;
+        margin-bottom: 0 !important;
 
         & > div {
-          margin-bottom: 55px;
+          margin-bottom: 45px;
           color: var(--ylb-color-dark-grey-1);
         }
 
@@ -86,7 +87,7 @@
             letter-spacing: 0.25px;
             text-transform: uppercase;
             font-weight: 700;
-            margin-bottom: 18px;
+            margin-bottom: 12px;
           }
 
           .select-wrapper {
@@ -116,12 +117,13 @@
           float: unset;
           width: 100%;
           background-color: var(--wsPartnerColor, black);
-          padding: 18px;
+          padding: 8px;
           font-size: 18px;
           font-family: var(--ylb-font-family-cachet);
           font-weight: 500;
           line-height: 30px;
           text-transform: none;
+          border-radius: 10px;
 
           @include media-breakpoint-up(md) {
             font-size: 24px;

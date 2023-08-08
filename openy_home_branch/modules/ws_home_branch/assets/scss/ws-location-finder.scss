@@ -7,11 +7,12 @@
     border-color: var(--wsPrimaryColor, blue);
 
     label {
-      color: var(--wsPrimaryColor, blue);
+      color: var(--wsPrimaryColor, black);
 
       &:after {
-        background-image: url('../svg/add_circle_colorway.svg');
-        top: 0;
+        top: 2px;
+        background: var(--wsPrimaryColor, black);
+        mask: url("../svg/add_circle_colorway.svg") no-repeat left;
 
         @include media-breakpoint-down(lg) {
           top: -9px;
@@ -28,12 +29,13 @@
         color: var(--ylb-color-white);
 
         &:after {
-          background-image: url('../svg/check_circle.svg');
           right: -54px;
-          top: 3px;
+          top: 2px;
+          background: var(--y-color-white);
+          mask: url("../svg/check_circle.svg") no-repeat left;
 
           @include media-breakpoint-down(lg) {
-            top: -6px;
+            top: -9px;
           }
         }
       }
