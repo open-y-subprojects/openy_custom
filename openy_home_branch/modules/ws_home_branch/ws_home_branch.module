@@ -16,7 +16,7 @@ function ws_home_branch_preprocess_page(array &$variables) {
     $hb_plugin_service->attachHbLibrarySettings($variables, 'hb_location_finder', [
       'locationsList' => '.block-inline-blocklb-openy-map .locations-list-lb .row',
       'branchTeaserSelector' => '.node--type-branch.node--view-mode--lb-teaser ',
-      'selectedText' => t('Preferred location') ,
+      'selectedText' => t('Preferred location'),
       'notSelectedText' => t('Preferred location'),
     ]);
   }
