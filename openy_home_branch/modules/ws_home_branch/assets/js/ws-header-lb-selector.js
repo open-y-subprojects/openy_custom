@@ -17,7 +17,7 @@
       $('.hb-selector--link').hbPlugin(settings);
       const header = $('.ws-header', context);
       if (header.hasClass('mobile')) {
-        const positionOffset = 5;
+        const positionOffset = 9;
         const mobileHeaderHeight = $('.header--top').outerHeight() + $('.header--bottom').outerHeight() + positionOffset;
         $('.hb-selector').css('top', mobileHeaderHeight + 'px');
       }
