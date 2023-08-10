@@ -13,7 +13,7 @@
    * @type {Drupal~behavior}
    */
   if (Drupal.homeBranch.plugins.length > 0) {
-    for (var key in Drupal.homeBranch.plugins) {
+    for (let key in Drupal.homeBranch.plugins) {
 
       if (Drupal.homeBranch.plugins.hasOwnProperty(key) && Drupal.homeBranch.plugins[key]['name'] === 'hb-loc-modal') {
         Drupal.homeBranch.plugins[key]['settings']['addMarkup'] = function (context) {
@@ -53,7 +53,7 @@
           this.bindButtons();
 
           // Let HomeBranch know how to call the modal window.
-          var self = this;
+          let self = this;
           Drupal.homeBranch.showModal = function (force) {
             self.show(force);
           };

@@ -42,7 +42,7 @@ menu_selector:
     - openy_home_branch/location_modal
 
 location_modal:
-  version: 0.1
+  version: 0.2
   js:
     js/hb-plugins/hb-loc-modal.js: {}
   css:

@@ -84,9 +84,9 @@
         this.element.addClass('hidden');
       },
       show: function (forceShow) {
-        var timestamp = Math.floor(Date.now() / 1000);
-        var lastShowTime = Drupal.homeBranch.getValue('lastShowTime');
-        var allowToShow = timestamp > lastShowTime + this.delay;
+        let timestamp = Math.floor(Date.now() / 1000);
+        let lastShowTime = Drupal.homeBranch.getValue('lastShowTime');
+        let allowToShow = Number(timestamp) > Number(lastShowTime) + Number(this.delay);
         if (this.areCookiesEnabled() && (allowToShow || forceShow)) {
           this.element.removeClass('hidden');
           Drupal.homeBranch.setValue('lastShowTime', timestamp);

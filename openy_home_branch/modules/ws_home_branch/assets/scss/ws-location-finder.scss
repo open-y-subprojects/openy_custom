@@ -14,7 +14,11 @@
         background: var(--wsPrimaryColor, black);
         mask: url("../svg/add_circle_colorway.svg") no-repeat left;
 
-        @include media-breakpoint-down(lg) {
+        @include media-breakpoint-between(md, lg) {
+          top: 0;
+        }
+
+        @include media-breakpoint-down(md) {
           top: -9px;
         }
       }
@@ -34,7 +38,11 @@
           background: var(--y-color-white);
           mask: url("../svg/check_circle.svg") no-repeat left;
 
-          @include media-breakpoint-down(lg) {
+          @include media-breakpoint-between(md, lg) {
+            top: 0;
+          }
+
+          @include media-breakpoint-down(md) {
             top: -9px;
           }
         }
@@ -45,5 +53,6 @@
   .card-footer {
     display: flex;
     justify-content: center;
+    min-height: 80px;
   }
 }
