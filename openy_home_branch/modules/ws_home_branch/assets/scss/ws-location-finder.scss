@@ -50,9 +50,15 @@
     }
   }
 
-  .card-footer {
-    display: flex;
-    justify-content: center;
-    min-height: 80px;
+  .card {
+    @include media-breakpoint-up(lg) {
+      min-height: 450px;
+    }
+
+    &-footer {
+      display: flex;
+      justify-content: center;
+      min-height: 80px;
+    }
   }
 }
