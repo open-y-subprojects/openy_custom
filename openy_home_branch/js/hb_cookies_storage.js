@@ -44,7 +44,7 @@
       Drupal.homeBranch.plugins.forEach(function (plugin, key, arr) {
         plugin.attach(plugin.settings);
       });
-      if (this.data['id'] == null && !this.data['dontAsk']) {
+      if (!drupalSettings.path.currentPathIsAdmin && this.data['id'] == null && !this.data['dontAsk']) {
         this.showModal();
       }
     },
