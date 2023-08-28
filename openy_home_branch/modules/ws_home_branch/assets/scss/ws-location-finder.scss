@@ -3,15 +3,55 @@
 @import "_variables";
 
 .block-inline-blocklb-openy-map {
-  .hb-location-checkbox-wrapper {
-    border-color: var(--wsPrimaryColor, blue);
 
+  &.block.ws-button-fill--filled--component {
+    .hb-location-checkbox-wrapper {
+      background-color: var(--wsPartnerColor, black);
+      color: var(--ylb-color-white, white);
+      border: 2px solid transparent;
+
+      label:after {
+        background-color: var(--ylb-color-white, white);
+      }
+
+      &:hover {
+        background-color: var(--ylb-color-white, white);
+        color: var(--wsPartnerColor, black);
+        border-color: var(--wsPartnerColor, black);
+
+        label:after {
+          background-color: var(--wsPartnerColor, black);
+        }
+      }
+    }
+  }
+
+  &.block.ws-button-fill--outlined--component .hb-location-checkbox-wrapper, .hb-location-checkbox-wrapper {
+    border: 2px solid var(--wsPartnerColor, black);
+    background-color: var(--ylb-color-white, white);
+    color: var(--wsPartnerColor, black);
+
+    label:after {
+      background-color: var(--wsPartnerColor, black);
+    }
+    &:hover {
+      background-color: var(--wsPartnerColor, black);
+      color: var(--ylb-color-white, white);
+      border-color: transparent;
+
+      label:after {
+        background-color: var(--ylb-color-white, white);
+      }
+    }
+  }
+
+  .hb-location-checkbox-wrapper {
     label {
-      color: var(--wsPrimaryColor, black);
+      color: inherit;
 
       &:after {
         top: 2px;
-        background: var(--wsPrimaryColor, black);
+        background: var(--wsPartnerColor, black);
         mask: url("../svg/add_circle_colorway.svg") no-repeat left;
 
         @include media-breakpoint-between(md, lg) {
@@ -59,6 +99,46 @@
       display: flex;
       justify-content: center;
       min-height: 80px;
+    }
+  }
+}
+
+.layout-container.ws-button-fill--filled--global {
+  .hb-location-checkbox-wrapper {
+    background-color: var(--wsPartnerColor, black);
+    color: var(--ylb-color-white, white);
+    border: 2px solid transparent;
+
+    label:after {
+      background-color: var(--ylb-color-white, white);
+    }
+
+    &:hover {
+      background-color: var(--ylb-color-white, white);
+      color: var(--wsPartnerColor, black);
+      border-color: var(--wsPartnerColor, black);
+
+      label:after {
+        background-color: var(--wsPartnerColor, black);
+      }
+    }
+  }
+}
+
+.layout-container.ws-button-fill--outlined--global {
+  .hb-location-checkbox-wrapper {
+    border: 2px solid var(--wsPartnerColor, black);
+    background-color: var(--ylb-color-white, white);
+    color: var(--wsPartnerColor, black);
+
+    &:hover {
+      background-color: var(--wsPartnerColor, black);
+      color: var(--ylb-color-white, white);
+      border-color: transparent;
+
+      label:after {
+        background-color: var(--ylb-color-white, white);
+      }
     }
   }
 }
