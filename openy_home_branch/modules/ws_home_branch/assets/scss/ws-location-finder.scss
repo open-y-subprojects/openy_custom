@@ -91,10 +91,6 @@
   }
 
   .card {
-    @include media-breakpoint-up(lg) {
-      //min-height: 450px;
-    }
-
     .node__content {
       .hours {
         min-height: 54px;
