@@ -19,9 +19,20 @@
     text-transform: none !important;
   }
 
-    .mobile.open & {
-      display: none;
+  svg {
+    margin-left: 5px;
+    visibility: hidden;
+  }
+
+  &.selected {
+    svg {
+      visibility: visible;
     }
+  }
+
+  .mobile.open & {
+    display: none;
+  }
 }
 
 [data-once="home-branch-cookies-storage"] {
