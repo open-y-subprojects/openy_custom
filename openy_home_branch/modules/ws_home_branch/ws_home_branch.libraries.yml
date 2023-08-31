@@ -29,7 +29,7 @@ location_modal_override:
     - openy_home_branch/hb_checkbox
 
 location_finder_override:
-  version: 0.6
+  version: 0.7
   js:
     assets/js/ws-location-finder.js: { }
   css:
