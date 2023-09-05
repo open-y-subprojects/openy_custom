@@ -72,7 +72,6 @@
         &:after {
           right: -54px;
           top: 2px;
-          //background: var(--y-color-white);
           mask: url("../svg/check_circle.svg") no-repeat left;
 
           @include media-breakpoint-between(md, lg) {
