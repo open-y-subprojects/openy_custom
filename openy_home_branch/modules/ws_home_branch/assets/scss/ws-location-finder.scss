@@ -67,15 +67,11 @@
 
   .hb-selected {
     .hb-location-checkbox-wrapper {
-      background-color: var(--wsPrimaryColor, blue);
 
       label {
-        color: var(--ylb-color-white);
-
         &:after {
           right: -54px;
           top: 2px;
-          background: var(--y-color-white);
           mask: url("../svg/check_circle.svg") no-repeat left;
 
           @include media-breakpoint-between(md, lg) {
