@@ -9,8 +9,8 @@
     color: var(--wsTertiaryColor, black) !important;
   }
 
-  &--link {
-    padding: 0 24px 0 10px;
+  &--link, &--branch--link {
+    margin: 0 14px 0 10px;
     color: var(--wsPartnerColor, black) !important;
     font-size: 16px;
     font-family: var(--ylb-font-family-verdana) !important;
