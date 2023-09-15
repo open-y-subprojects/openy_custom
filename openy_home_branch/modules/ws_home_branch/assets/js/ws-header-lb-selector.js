@@ -35,11 +35,10 @@
         }
         let selected = Drupal.homeBranch.getValue('id');
         let locations = Drupal.homeBranch.getLocations();
-        console.log(Drupal.homeBranch);
         if (selected) {
           this.element.text(locations[selected]);
           this.element.parent().addClass('selected');
-          this.element.attr('href', '/node/' + Drupal.homeBranch.getValue('id'));
+          this.element.attr('href', `${window.location.origin}${drupalSettings.path.baseUrl}/node/` + Drupal.homeBranch.getValue('id'));
           this.element.removeClass('hb-selector--link');
         }
         else {
