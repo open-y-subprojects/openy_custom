@@ -39,7 +39,7 @@
         left: auto;
         margin-left: 5px;
         right: -50px;
-        top: -9px;
+        top: calc(50% - 20px);
         transform: none;
         width: 40px;
       }
@@ -85,7 +85,7 @@
             display: inline-block;
             height: 40px;
             right: -54px;
-            top: -5px;
+            top: calc(50% - 20px);
             width: 40px;
           }
         }

@@ -50,17 +50,8 @@
       color: inherit;
 
       &:after {
-        top: 2px;
         background: var(--wsPartnerColor, black);
         mask: url("../svg/add_circle_colorway.svg") no-repeat left;
-
-        @include media-breakpoint-between(md, lg) {
-          top: 0;
-        }
-
-        @include media-breakpoint-down(md) {
-          top: -9px;
-        }
       }
     }
   }
@@ -71,16 +62,7 @@
       label {
         &:after {
           right: -54px;
-          top: 2px;
           mask: url("../svg/check_circle.svg") no-repeat left;
-
-          @include media-breakpoint-between(md, lg) {
-            top: 0;
-          }
-
-          @include media-breakpoint-down(md) {
-            top: -9px;
-          }
         }
       }
     }

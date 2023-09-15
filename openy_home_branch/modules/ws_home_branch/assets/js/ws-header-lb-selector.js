@@ -24,6 +24,7 @@
     },
     settings: {
       selector: '.hb-selector--link',
+      selectorBranch: '.hb-selector--branch--link',
       event: 'click',
       element: null,
       targetSelector: drupalSettings.home_branch.hb_header_lb_selector.targetSelector,
@@ -37,10 +38,14 @@
         if (selected) {
           this.element.text(locations[selected]);
           this.element.parent().addClass('selected');
+          this.element.attr('href', `${window.location.origin}${drupalSettings.path.baseUrl}/node/` + Drupal.homeBranch.getValue('id'));
+          this.element.removeClass('hb-selector--link');
         }
         else {
           this.element.text(this.defaultTitle);
           this.element.parent().removeClass('selected');
+          this.element.addClass('hb-selector--link');
+          this.element.attr('href', '#');
         }
       },
       onChange: function (event, el) {
@@ -49,7 +54,7 @@
       },
       addMarkup: function (context) {
         let block = $(this.targetSelector);
-        block.append('<span class="hb-selector"><i class="fas fa-map-marker-alt"></i><a class="hb-selector--link" href="#">' + this.defaultTitle + '</a><svg width="9px" height="5px" viewBox="0 0 9 5" xmlns="http://www.w3.org/2000/svg"\n' +
+        block.append('<span class="hb-selector"><i class="fas fa-map-marker-alt"></i><a class="hb-selector--branch--link">' + this.defaultTitle + '</a><a href="#" class="hb-selector--link" ><svg width="9px" height="5px" viewBox="0 0 9 5" xmlns="http://www.w3.org/2000/svg"\n' +
           '             xmlns:xlink="http://www.w3.org/1999/xlink">\n' +
           '          <title>Chevron</title>\n' +
           '          <g id="UI-KIt" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">\n' +
@@ -64,9 +69,9 @@
           '              </g>\n' +
           '            </g>\n' +
           '          </g>\n' +
-          '        </svg></span>');
+          '        </svg></a></span>');
         // Save created element in plugin.
-        this.element = $(this.selector, block);
+        this.element = $(this.selectorBranch, block);
       }
     }
   });
