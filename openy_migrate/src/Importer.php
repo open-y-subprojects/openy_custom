@@ -52,6 +52,26 @@ class Importer implements ImporterInterface {
   }
 
   /**
+   * Rollback single migration with dependencies.
+   *
+   * @param \Drupal\migrate\Plugin\Migration $migration
+   *   Migration.
+   */
+  protected function rollbackMigration(Migration $migration) {
+    // Run dependencies first.
+    $dependencies = $migration->getMigrationDependencies();
+    $required_ids = $dependencies['required'];
+    if ($required_ids) {
+      $required_migrations = $this->migrationManager->createInstances($required_ids);
+      array_walk($required_migrations, [$this, 'rollbackMigration']);
+    }
+
+    $message = new MigrateMessage();
+    $executable = new MigrateExecutable($migration, $message);
+    $executable->rollback();
+  }
+
+  /**
    * {@inheritdoc}
    */
   public function import($migration_id) {
@@ -66,6 +86,24 @@ class Importer implements ImporterInterface {
     $migrations = $this->migrationManager->createInstancesByTag($migration_tag);
     foreach ($migrations as $migration) {
       $this->importMigration($migration);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function rollback($migration_id) {
+    $migration = $this->migrationManager->createInstance($migration_id);
+    $this->rollbackMigration($migration);
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function rollbackByTag($migration_tag) {
+    $migrations = $this->migrationManager->createInstancesByTag($migration_tag);
+    foreach ($migrations as $migration) {
+      $this->rollbackMigration($migration);
     }
   }
 
