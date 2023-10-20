@@ -24,11 +24,11 @@
       listSelector: '#hb-locations-list',
       btnYesSelector: '.action-save',
       btnNoSelector: '.close, .action-cancel',
-      modalTitle: drupalSettings.home_branch.hb_loc_modal.modalTitle,
-      modalDescription: drupalSettings.home_branch.hb_loc_modal.modalDescription,
-      dontAskTitle: drupalSettings.home_branch.hb_loc_modal.dontAskTitle,
-      learnMoreText: drupalSettings.home_branch.hb_loc_modal.learnMoreText,
-      delay: drupalSettings.home_branch.hb_loc_modal.modalDelay,
+      modalTitle: drupalSettings.home_branch.hb_loc_modal?.modalTitle,
+      modalDescription: drupalSettings.home_branch.hb_loc_modal?.modalDescription,
+      dontAskTitle: drupalSettings.home_branch.hb_loc_modal?.dontAskTitle,
+      learnMoreText: drupalSettings.home_branch.hb_loc_modal?.learnMoreText,
+      delay: drupalSettings.home_branch.hb_loc_modal?.modalDelay,
       init: function () {
         if (!this.element) {
           return;

@@ -21,8 +21,8 @@
       selector: '.hb-menu-selector',
       event: 'click',
       element: null,
-      menuSelector: drupalSettings.home_branch.hb_menu_selector.menuSelector,
-      defaultTitle: drupalSettings.home_branch.hb_menu_selector.defaultTitle,
+      menuSelector: drupalSettings.home_branch.hb_menu_selector?.menuSelector,
+      defaultTitle: drupalSettings.home_branch.hb_menu_selector?.defaultTitle,
       init: function () {
         if (!this.element) {
           return;
