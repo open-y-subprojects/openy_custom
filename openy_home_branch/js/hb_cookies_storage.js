@@ -30,6 +30,9 @@
 
       // Get locations list.
       var self = this;
+      if(!drupalSettings.home_branch.hb_menu_selector) {
+        return;
+      }
       self.locations = drupalSettings.home_branch.hb_menu_selector.locations;
       setTimeout(function() {
         self.attachPlugins();
