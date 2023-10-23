@@ -93,7 +93,7 @@ class HolidayHoursFormatter extends FormatterBase implements ContainerFactoryPlu
 
     // Calculate timezone offset.
     $tz = new \DateTimeZone($this->configFactory->get('system.date')->get('timezone')['default']);
-    $dt = new \DateTime(NULL, $tz);
+    $dt = new \DateTime('', $tz);
     $tz_offset = $dt->getOffset();
 
     // The Holiday Hours should be shown before N days.
