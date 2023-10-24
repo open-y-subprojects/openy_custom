@@ -40,8 +40,9 @@
             '<div class="hb-loc-modal__modal--footer">' +
             '<button class="btn btn-lg btn-success action-save">Set as preferred location</button>' +
             '<div class="dont-ask hb-checkbox-wrapper">' +
+            '<label for="hb-dont-ask-checkbox">' +
             '<input type="checkbox" id="hb-dont-ask-checkbox">' +
-            '<label for="hb-dont-ask-checkbox">' + this.dontAskTitle + '</label>' +
+            this.dontAskTitle + '</label>' +
             '</div>' +
             '</div>' +
             '</div>' +
