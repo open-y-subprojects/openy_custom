@@ -82,6 +82,7 @@
       },
       hide: function () {
         this.element.addClass('hidden');
+        this.element.modal('hide');
       },
       show: function (forceShow) {
         let timestamp = Math.floor(Date.now() / 1000);
@@ -90,6 +91,7 @@
         if (this.areCookiesEnabled() && (allowToShow || forceShow)) {
           this.element.removeClass('hidden');
           Drupal.homeBranch.setValue('lastShowTime', timestamp);
+          this.element.modal('show');
         }
       },
       addMarkup: function (context) {

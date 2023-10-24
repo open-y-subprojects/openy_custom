@@ -17,9 +17,9 @@
 
       if (Drupal.homeBranch.plugins.hasOwnProperty(key) && Drupal.homeBranch.plugins[key]['name'] === 'hb-loc-modal') {
         Drupal.homeBranch.plugins[key]['settings']['addMarkup'] = function (context) {
-          this.element = $('<div id="hb-loc-modal" class="hidden">' +
-            '<div class="hb-loc-modal__modal" tabindex="-1" role="dialog">' +
-            '<button type="button" class="close"></button>' +
+          this.element = $('<div id="hb-loc-modal" class="hidden modal" tabindex="-1">' +
+            '<div class="hb-loc-modal__modal" role="dialog">' +
+            '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="visually-hidden">Close</span> </button>' +
             '<div class="modal-content">' +
             '<div class="hb-loc-modal__modal--header">' +
             '<spant class="title">' + this.modalTitle + '</spant>' +
@@ -40,8 +40,9 @@
             '<div class="hb-loc-modal__modal--footer">' +
             '<button class="btn btn-lg btn-success action-save">Set as preferred location</button>' +
             '<div class="dont-ask hb-checkbox-wrapper">' +
+            '<label for="hb-dont-ask-checkbox">' +
             '<input type="checkbox" id="hb-dont-ask-checkbox">' +
-            '<label for="hb-dont-ask-checkbox">' + this.dontAskTitle + '</label>' +
+            this.dontAskTitle + '</label>' +
             '</div>' +
             '</div>' +
             '</div>' +
