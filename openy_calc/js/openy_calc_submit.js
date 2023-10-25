@@ -9,10 +9,9 @@
    */
   Drupal.behaviors.openy_calc_scroll = {
     attach: function (context, settings) {
-      $(once('openy-calc-scroll', '#membership-calc-wrapper', context))
-        .each(function () {
-          var divPosition = $(this).offset();
-          $('html, body').animate({scrollTop: divPosition.top - 100}, "slow");
+      once('openy-calc-scroll', '#membership-calc-wrapper').forEach((wrapper) => {
+        var divPosition = $(wrapper).offset();
+        $('html, body').animate({scrollTop: divPosition.top - 100}, "slow");
       });
     }
   };
