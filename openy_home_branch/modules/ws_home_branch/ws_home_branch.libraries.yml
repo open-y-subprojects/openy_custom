@@ -5,7 +5,7 @@ ws_checkbox:
       assets/css/ws-checkbox.css: {}
 
 hb_header_lb_selector:
-  version: 0.7
+  version: 0.8
   js:
     assets/js/ws-header-lb-selector.js: {}
   css:
