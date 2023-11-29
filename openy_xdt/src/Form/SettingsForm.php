@@ -6,7 +6,7 @@ use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Configure YMCA Website Services Cross-domain Tracking (XDT) settings for this site.
+ * Configure YMCA Website Services Cross-domain Tracking (XDT) settings.
  */
 class SettingsForm extends ConfigFormBase {
 
@@ -28,7 +28,8 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // Both items are stored as arrays in config, so they need to be imploded to be displayed in the textarea.
+    // Both items are stored as arrays in config, so they need to be imploded
+    // to be displayed in the textarea.
     $form['cookies'] = [
       '#type' => 'textarea',
       '#title' => $this->t('Cookies'),
@@ -40,7 +41,7 @@ class SettingsForm extends ConfigFormBase {
       '#title' => $this->t('Domains'),
       '#default_value' => implode(PHP_EOL, $this->config('openy_xdt.settings')->get('domains') ?? []),
       '#description' => $this->t('The destination domains that will have cookies added to the query string. One per line. If empty, no action will be taken.'),
-      '#placeholder' => 'www.example.com'
+      '#placeholder' => 'www.example.com',
     ];
     return parent::buildForm($form, $form_state);
   }

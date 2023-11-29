@@ -16,12 +16,17 @@ use Symfony\Component\HttpKernel\KernelEvents;
  */
 class OpenyXdtSubscriber implements EventSubscriberInterface {
 
+  /**
+   * The config factory.
+   *
+   * @var \Drupal\Core\Config\ConfigFactoryInterface
+   */
   protected $configFactory;
 
   /**
    * Constructor so we can read configuration.
    *
-   * @param ConfigFactoryInterface $config_factory
+   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
    */
   public function __construct(ConfigFactoryInterface $config_factory) {
@@ -31,7 +36,7 @@ class OpenyXdtSubscriber implements EventSubscriberInterface {
   /**
    * Kernel response event handler.
    *
-   * @param ResponseEvent $event
+   * @param \Symfony\Component\HttpKernel\Event\ResponseEvent $event
    *   Response event.
    */
   public function onKernelResponse(ResponseEvent $event) {
@@ -44,7 +49,7 @@ class OpenyXdtSubscriber implements EventSubscriberInterface {
       $domains = $config->get('domains');
 
       // Get the destination url.
-      /* @var $response TrustedRedirectResponse */
+      /** @var \Drupal\Core\Routing\TrustedRedirectResponse $response */
       $response = $event->getResponse();
       $url = $response->getTargetUrl();
 
@@ -56,7 +61,8 @@ class OpenyXdtSubscriber implements EventSubscriberInterface {
         return;
       }
 
-      // If the domain matches the url host then merge any additional cookies into the query.
+      // If the domain matches the url host then merge any additional cookies
+      // into the query.
       foreach ($cookies as $cookie) {
         if (isset($_COOKIE[$cookie])) {
           $parts['query'][$cookie] = Xss::filter($_COOKIE[$cookie]);
@@ -66,7 +72,7 @@ class OpenyXdtSubscriber implements EventSubscriberInterface {
       // Finally recompose the URL and convert it back to a string.
       $newUrl = Url::fromUri($parts['path'], [
         'query' => $parts['query'],
-        'fragment' => $parts['fragment']
+        'fragment' => $parts['fragment'],
       ])->toString();
 
       // Pass the new URL back to the response.
