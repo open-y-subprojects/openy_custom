@@ -37,6 +37,11 @@
       width: 100%;
     }
 
+    &.modal-dialog {
+      height: unset;
+      pointer-events: unset;
+      }
+
     .modal-content {
       border-radius: 10px;
       background-color: #FFFFFF;
