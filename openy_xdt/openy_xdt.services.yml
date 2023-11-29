@@ -1,0 +1,5 @@
+services:
+  openy_xdt.event_subscriber:
+    class: Drupal\openy_xdt\EventSubscriber\OpenyXdtSubscriber
+    tags:
+      - { name: event_subscriber }
