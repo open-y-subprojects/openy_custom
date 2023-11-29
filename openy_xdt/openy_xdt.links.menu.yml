@@ -1,5 +1,6 @@
 openy_xdt.settings:
-  title: Cross-domain Tracking Settings
+  title: Cross-domain tracking settings
   description: Configure cookies and domains to enable cross-domain tracking.
+  parent: openy_system.openy_settings
   route_name: openy_xdt.settings
   weight: 10

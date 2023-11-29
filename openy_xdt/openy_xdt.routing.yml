@@ -1,5 +1,5 @@
 openy_xdt.settings:
-  path: '/admin/openy/settings/xdt-settings'
+  path: '/admin/openy/settings/xdt'
   defaults:
     _title: 'Cross-domain Tracking Settings'
     _form: 'Drupal\openy_xdt\Form\SettingsForm'
