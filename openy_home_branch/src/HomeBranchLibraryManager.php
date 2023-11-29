@@ -31,8 +31,7 @@ class HomeBranchLibraryManager extends DefaultPluginManager {
     );
 
     $this->alterInfo('home_branch_library_info');
-    $this->setCacheBackend($cache_backend, 'home_branch_library', ['node_list']);
-    $this->factory = new ContainerFactory($this->getDiscovery());
+    $this->setCacheBackend($cache_backend, 'home_branch_library');
   }
 
   /**
