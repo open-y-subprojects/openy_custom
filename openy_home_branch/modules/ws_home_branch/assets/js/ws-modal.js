@@ -18,7 +18,7 @@
       if (Drupal.homeBranch.plugins.hasOwnProperty(key) && Drupal.homeBranch.plugins[key]['name'] === 'hb-loc-modal') {
         Drupal.homeBranch.plugins[key]['settings']['addMarkup'] = function (context) {
           this.element = $('<div id="hb-loc-modal" class="hidden modal" tabindex="-1">' +
-            '<div class="hb-loc-modal__modal" role="dialog">' +
+            '<div class="hb-loc-modal__modal modal-dialog"" role="dialog">' +
             '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" class="visually-hidden">Close</span> </button>' +
             '<div class="modal-content">' +
             '<div class="hb-loc-modal__modal--header">' +
