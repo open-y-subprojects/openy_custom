@@ -1,5 +1,5 @@
 ws_checkbox:
-  version: 0.3
+  version: 0.4
   css:
     component:
       assets/css/ws-checkbox.css: {}

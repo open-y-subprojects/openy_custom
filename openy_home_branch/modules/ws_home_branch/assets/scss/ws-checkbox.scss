@@ -6,7 +6,7 @@
 
   .hb-location-checkbox-wrapper {
     align-items: center;
-    border-radius: 10px;
+    border-radius: var(--wsBorderRadius, unset);
     border: 2px solid var(--ylb-color-white);
     color: inherit;
     display: flex;
