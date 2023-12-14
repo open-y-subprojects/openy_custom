@@ -6,7 +6,7 @@
  */
 
 /**
- * Alter the default Open Y themes search form parameters.
+ * Alter the default YMCA Website Services themes search form parameters.
  *
  * Search parameters for theme originally stored in theme_name.settings file.
  *
