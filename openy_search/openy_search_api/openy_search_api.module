@@ -26,8 +26,15 @@ function openy_search_api_entity_view_alter(&$build, EntityInterface $entity, En
  * Implements hook_help().
  */
 function openy_search_api_help($route_name, RouteMatchInterface $route_match) {
-  if ($route_name == 'help.page.openy_search_api') {
-    return '<p>' . t('Read <a href="https://www.drupal.org/docs/8/modules/search-api">Search API online documentation</a> at Drupal.org to get information about Search configuration.') . '</p>';
+  if ($route_name == 'help.page.openy_search_api' || $route_name == 'openy_search_api.settings') {
+    return '<p>' .
+      t('Read our <a href="@dsdocs" target="_blank">documentation on enabling Solr site search</a> and the <a href="@dodocs" target="_blank">Drupal.org Search API online documentation</a> to get information about Search configuration.',
+        [
+          '@dsdocs' => 'https://ds-docs.y.org/docs/development/install-solr-site-search-for-open-y/',
+          '@dodocs' => 'https://www.drupal.org/docs/8/modules/search-api',
+        ]
+      )
+      . '</p>';
   }
 }
 
