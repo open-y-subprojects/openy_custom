@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\openy_google_search\Form;
+namespace Drupal\openy_search_api\Form;
 
 use Drupal\Core\Cache\CacheTagsInvalidatorInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
@@ -9,7 +9,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
- * Settings Form for openy_google_search.
+ * Settings Form for openy_search_api.
  */
 class SettingsForm extends ConfigFormBase {
 
@@ -21,7 +21,7 @@ class SettingsForm extends ConfigFormBase {
   protected $cacheTagsInvalidator;
 
   /**
-   * Constructs a \Drupal\openy_google_search\Form\SettingsForm object.
+   * Constructs a \Drupal\openy_search_api\Form\SettingsForm object.
    *
    * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
    *   The factory for configuration objects.
@@ -47,7 +47,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function getFormId() {
-    return 'openy_google_search_settings';
+    return 'openy_search_api_settings';
   }
 
   /**
@@ -55,7 +55,7 @@ class SettingsForm extends ConfigFormBase {
    */
   protected function getEditableConfigNames() {
     return [
-      'openy_google_search.settings',
+      'openy_search_api.settings',
     ];
   }
 
@@ -63,16 +63,7 @@ class SettingsForm extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('openy_google_search.settings');
-
-    $form['google_engine_id'] = [
-      '#type' => 'textfield',
-      '#title' => $this->t('Google Search Engine ID'),
-      '#description' => $this->t('Go to the <a href="https://programmablesearchengine.google.com/controlpanel/all" target="_blank">Google Control Panel</a> then copy the ID from the search engine overview.'),
-      '#size' => 40,
-      '#default_value' => !empty($config->get('google_engine_id')) ? $config->get('google_engine_id') : '',
-      '#required' => TRUE,
-    ];
+    $config = $this->config('openy_search_api.settings');
 
     $form['search_page_id'] = [
       '#type' => 'textfield',
@@ -86,11 +77,10 @@ class SettingsForm extends ConfigFormBase {
     $form['search_query_key'] = [
       '#type' => 'textfield',
       '#title' => $this->t('Search query key'),
-      '#description' => $this->t('The argument preceding the search string in the URL. For example, in <code>/search?q=swim</code>, the query key is <code>q</code>. Google does not allow configuring this value.'),
+      '#description' => $this->t('The argument preceding the search string in the URL. For example, in <code>/search?q=swim</code>, the query key is <code>q</code>. Changing this also requires changing the View that is performing the search.'),
       '#size' => 40,
       '#default_value' => !empty($config->get('search_query_key')) ? $config->get('search_query_key') : '',
       '#required' => TRUE,
-      '#disabled' => 'disabled',
     ];
 
     return parent::buildForm($form, $form_state);
@@ -115,8 +105,7 @@ class SettingsForm extends ConfigFormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
     $values = $form_state->getValues();
-    $config = $this->config('openy_google_search.settings');
-    $config->set('google_engine_id', $values['google_engine_id']);
+    $config = $this->config('openy_search_api.settings');
     $config->set('search_page_id', $values['search_page_id']);
     $config->set('search_query_key', $values['search_query_key']);
     $config->save();

@@ -9,7 +9,7 @@ dependencies:
 id: search_content
 label: 'Content search'
 module: views
-description: 'Block to render content search results in Open Y Search API paragraph.'
+description: 'Block to render content search results in YMCA Website Services Search API paragraph.'
 tag: ''
 base_table: search_api_index_search_content
 base_field: search_api_id

@@ -6,7 +6,7 @@
  */
 
 /**
- * Alter the default Open Y themes search form parameters.
+ * Alter the default YMCA Website Services themes search form parameters.
  *
  * Search parameters for theme originally stored in theme_name.settings file.
  *
@@ -15,7 +15,7 @@
  *
  * @see \Drupal\openy_search\Config\OpenySearchOverrides::loadOverrides()
  */
-function hook_openy_search_theme_configuration_alter(&$search_config) {
+function hook_openy_search_theme_configuration_alter(array &$search_config) {
   $search_config = [
     'search_query_key' => 'q',
     'search_page_alias' => 'search',
