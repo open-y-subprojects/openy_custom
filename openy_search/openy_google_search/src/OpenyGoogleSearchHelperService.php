@@ -7,7 +7,7 @@ use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\path_alias\AliasManagerInterface;
 
 /**
- * Class OpenyGoogleSearchHelperService.
+ * Helper class for Google Search results page.
  */
 class OpenyGoogleSearchHelperService {
 
@@ -52,6 +52,7 @@ class OpenyGoogleSearchHelperService {
    * Gets alias for search results page id saved in module settings config.
    *
    * @return string
+   *   The url alias of the search page.
    */
   public function getSearchResultsPageAlias() {
     $language = $this->languageManager->getCurrentLanguage()->getId();

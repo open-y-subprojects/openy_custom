@@ -99,15 +99,14 @@ class SettingsForm extends ConfigFormBase {
   /**
    * {@inheritdoc}
    */
-  public function validateForm(array &$form, FormStateInterface $form_state)
-  {
+  public function validateForm(array &$form, FormStateInterface $form_state) {
     $search_page_id = $form_state->getValue('search_page_id');
 
     // Set an error if the page id is not a number.
     if (!is_numeric($search_page_id)) {
       $form_state
         ->setErrorByName('search_page_id', $this
-        ->t('The Search page ID must be a number.'));
+          ->t('The Search page ID must be a number.'));
     }
   }
 
