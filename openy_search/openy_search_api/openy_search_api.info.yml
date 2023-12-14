@@ -3,7 +3,7 @@ type: module
 description: Provides a Drupal Search API Engine for YMCA Website Services.
 core_version_requirement: ^8.8 || ^9 || ^10
 package: YMCA Website Services
-version: 8.x-1.0
+version: 1.1.0
 configure: openy_search_api.settings
 dependencies:
   - drupal:node
