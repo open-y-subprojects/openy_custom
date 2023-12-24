@@ -122,7 +122,7 @@ class CalcBlockForm extends FormBase {
       '#theme' => 'openy_calc_form_header',
       '#steps' => $steps,
     ];
-    $header = $this->renderer->renderRoot($header);
+    $header = $this->renderer->render($header);
     $form['header'] = [
       '#markup' => $header,
     ];
