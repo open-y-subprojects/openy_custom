@@ -52,9 +52,16 @@ function ws_home_branch_preprocess_block__lb_openy_map(&$variables) {
 
 function _ws_home_branch_skip_override($node) {
   // Skip page without node.
+  if (!$node instanceof NodeInterface) {
+    return TRUE;
+  }
   // Skip nodes without LB usage.
+  if (!$node->hasField('layout_builder__layout')) {
+    return TRUE;
+  }
   // Skip nodes with optional layout builder usage with deactivated usage.
-  if (!$node instanceof NodeInterface || !$node->hasField('layout_builder__layout') && $node->hasField('field_use_layout_builder') && !$node->field_use_layout_builder->value) {
+  if ($node->hasField('field_use_layout_builder')
+    && !$node->field_use_layout_builder->value) {
     return TRUE;
   }
   return FALSE;
