@@ -51,7 +51,7 @@ class OpenyModulesUninstallConfirmForm extends ModulesUninstallConfirmForm {
     ];
 
     // List the dependent entities.
-    $this->addDependencyListsToForm($form, 'module', $this->modules, $this->configManager, $this->entityManager);
+    $this->addDependencyListsToForm($form, 'module', $this->modules, $this->configManager, $this->entityTypeManager);
 
     return $form;
   }
