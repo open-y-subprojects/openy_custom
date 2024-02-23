@@ -17,7 +17,7 @@ hb_header_lb_selector:
     - openy_home_branch/location_modal
 
 location_modal_override:
-  version: 0.4
+  version: 0.5
   js:
     assets/js/ws-modal.js: {}
   css:
