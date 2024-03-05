@@ -70,7 +70,7 @@ class CustomHoursItem extends FieldItemBase implements FieldItemInterface {
    */
   public function isEmpty() {
     $values = $this->getValue();
-    if ($values['hours_label'] !== '') {
+    if (isset($values['hours_label']) && $values['hours_label'] !== '') {
       return FALSE;
     }
     return TRUE;
