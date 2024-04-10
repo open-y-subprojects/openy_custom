@@ -2,6 +2,7 @@
 
 namespace Drupal\openy_data_wrapper;
 
+use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\openy_socrates\OpenyDataServiceInterface;
 use Drupal\openy_socrates\OpenySocratesFacade;
@@ -61,6 +62,13 @@ class DataWrapper implements OpenyDataServiceInterface {
   protected $configFactory;
 
   /**
+   * Language manager.
+   *
+   * @var \Drupal\Core\Language\LanguageManagerInterface
+   */
+  protected $languageManager;
+
+  /**
    * DataWrapperBase constructor.
    *
    * @param \Drupal\Core\Render\RendererInterface $renderer
@@ -75,14 +83,17 @@ class DataWrapper implements OpenyDataServiceInterface {
    *   Logger channel.
    * @param \Drupal\Core\Config\ConfigFactoryInterface $configFactory
    *   Config factory.
+   * @param \Drupal\Core\Language\LanguageManagerInterface $languageManager
+   *   Language manager.
    */
-  public function __construct(RendererInterface $renderer, EntityTypeManagerInterface $entityTypeManager, OpenySocratesFacade $socrates, CacheBackendInterface $cacheBackend, LoggerChannelInterface $loggerChannel, ConfigFactoryInterface $configFactory) {
+  public function __construct(RendererInterface $renderer, EntityTypeManagerInterface $entityTypeManager, OpenySocratesFacade $socrates, CacheBackendInterface $cacheBackend, LoggerChannelInterface $loggerChannel, ConfigFactoryInterface $configFactory, LanguageManagerInterface $languageManager) {
     $this->renderer = $renderer;
     $this->entityTypeManager = $entityTypeManager;
     $this->socrates = $socrates;
     $this->cacheBackend = $cacheBackend;
     $this->loggerChannel = $loggerChannel;
     $this->configFactory = $configFactory;
+    $this->languageManager = $languageManager;
   }
 
   /**
@@ -117,11 +128,13 @@ class DataWrapper implements OpenyDataServiceInterface {
       $location_ids[] = $id;
     }
     else {
+      $langcode = $this->languageManager->getCurrentLanguage()->getId();
       $location_ids = $this->entityTypeManager->getStorage('node')
         ->getQuery()
         ->accessCheck(FALSE)
         ->condition('type', $type)
         ->condition('status', 1)
+        ->condition('langcode', $langcode)
         ->execute();
     }
 
@@ -214,11 +227,13 @@ class DataWrapper implements OpenyDataServiceInterface {
    */
   public function getLocations() {
     $data = [];
+    $langcode = $this->languageManager->getCurrentLanguage()->getId();
 
     $location_ids = $this->entityTypeManager->getStorage('node')
       ->getQuery()
       ->accessCheck(FALSE)
       ->condition('type', 'branch')
+      ->condition('langcode', $langcode)
       ->addTag('data_wrapper_locations')
       ->execute();
 
