@@ -1,4 +1,4 @@
-.locations .node--type-branch.node--view-mode-teaser.hb-selected {
+.locations:not(.page-with-lb) .node--type-branch.node--view-mode-teaser.hb-selected {
   border: solid 1px #0060ad;
 }
 
@@ -6,7 +6,7 @@
   padding: 20px;
 }
 
-.locations .node--type-branch .hb-location-checkbox-wrapper {
+.locations:not(.page-with-lb) .node--type-branch .hb-location-checkbox-wrapper {
   align-self: end;
   background-color: #f2f2f2;
   border-top: solid 1px #cccccc;
@@ -15,7 +15,7 @@
   width: 100%;
 }
 
-.locations .node--type-branch.node--view-mode-teaser.hb-selected .hb-location-checkbox-wrapper {
+.locations:not(.page-with-lb) .node--type-branch.node--view-mode-teaser.hb-selected .hb-location-checkbox-wrapper {
   border-top: solid 1px #0060ad;
 }
 
@@ -28,11 +28,11 @@
   padding: 0 !important;
 }
 
-.locations .node--type-branch .location-item--title,
-.locations .node--type-branch .field-location-area {
+.locations:not(.page-with-lb) .node--type-branch .location-item--title,
+.locations:not(.page-with-lb) .node--type-branch .field-location-area {
   padding: 0 20px;
 }
 
-.locations .node--type-branch .node__content {
+.locations:not(.page-with-lb) .node--type-branch .node__content {
   padding: 0 20px 20px;
 }
