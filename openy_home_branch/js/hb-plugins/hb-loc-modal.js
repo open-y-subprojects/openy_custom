@@ -54,16 +54,15 @@
       handleDontAsk: function () {
         var $dontAskCheckbox = this.element.find('#hb-dont-ask-checkbox');
         $dontAskCheckbox.attr('checked', Drupal.homeBranch.getValue('dontAsk'));
-        $dontAskCheckbox.on('click', function () {
-          Drupal.homeBranch.setValue('dontAsk', $(this).is(':checked'));
-        });
       },
       bindButtons: function () {
-        var self = this;
+        let self = this;
+        let $dontAskCheckbox = self.element.find('#hb-dont-ask-checkbox');
         this.element.find(self.btnYesSelector).on('click', function () {
-          var $locationList = self.element.find(self.listSelector);
-          var value = $locationList.val();
+          let $locationList = self.element.find(self.listSelector);
+          let value = $locationList.val();
           Drupal.homeBranch.setValue('id', value === 'null' ? null : value);
+          Drupal.homeBranch.setValue('dontAsk', $dontAskCheckbox.is(':checked'));
           self.hide();
         });
         this.element.find(self.btnNoSelector).on('click', function () {
