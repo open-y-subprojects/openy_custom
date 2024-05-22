@@ -316,10 +316,7 @@
           dom[tagnum].appendChild(atcb_list);
         } else {
           atcb_link = dom[tagnum].querySelector('.atcb-link');
-
-          if(dom[tagnum].querySelector('.atcb-list') == undefined) {
-            atcb_link.parentNode.appendChild(atcb_list);
-          }
+          atcb_link.parentNode.appendChild(atcb_list);
           atcb_link.tabIndex = 0;
           if (atcb_link.id == '') {
             atcb_link.id = atcb_link_id_val;
