@@ -7,3 +7,7 @@ services:
     arguments: ['@config.factory', '@current_user']
     tags:
       - {name: event_subscriber}
+  openy_system.route_subscriber:
+    class: Drupal\openy_system\Routing\RouteSubscriber
+    tags:
+      - {name: event_subscriber}
