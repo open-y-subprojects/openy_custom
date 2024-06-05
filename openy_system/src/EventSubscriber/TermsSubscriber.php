@@ -2,13 +2,13 @@
 
 namespace Drupal\openy_system\EventSubscriber;
 
+use Drupal\Core\Url;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpKernel\KernelEvents;
+use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Url;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\RequestEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 
 /**
  * Class TermsSubscriber.
@@ -28,12 +28,7 @@ class TermsSubscriber implements EventSubscriberInterface {
   protected $currentUser;
 
   /**
-   * Constructs a new TermsSubscriber event subscriber.
    *
-   * @param \Drupal\Core\Config\ConfigFactoryInterface $config_factory
-   * *   The configuration factory.
-   * @param \Drupal\Core\Session\AccountInterface $current_user
-   *    The current logged user.
    */
   public function __construct(ConfigFactoryInterface $config_factory, AccountInterface $current_user) {
     $this->config = $config_factory->get('openy.terms_and_conditions.schema');
@@ -44,12 +39,6 @@ class TermsSubscriber implements EventSubscriberInterface {
    * {@inheritdoc}
    */
   public function checkForRedirection(RequestEvent $event) {
-    $request = clone $event->getRequest();
-    // See https://www.drupal.org/project/redirect/issues/3373123 .
-    if ($request->attributes->get('_disable_route_normalizer')) {
-      return;
-    }
-
     $url = Url::fromRoute('openy_system.openy_terms_and_conditions')
       ->toString();
     $request_uri = $event->getRequest()->getRequestUri();
