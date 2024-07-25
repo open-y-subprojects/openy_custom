@@ -1,8 +1,16 @@
+{#
+/**
+ * @file
+ * A template for header section of the Membership Calculator.
+ *
+ * Available variables:
+ * - steps: a data for steps.
+ */
+#}
 <div class="membership-calc__header">
   <h2 tabindex="0" class="display-6 mb-3">{{ 'Membership Calculator'|t }}</h2>
 
   <ul role="tablist" aria-label="{{ 'Membership options selection'|t }}" class="nav nav-pills nav-fill mb-5">
-    {#  {% set active_step = 1 %}#}
     {% for step in steps %}
       {% if step.active %}
         {% set active_step = step.number %}
@@ -19,7 +27,6 @@
       <li class="nav-item{% if step.active %} active{% endif %}">
         <div class="step-{{ step.number }} step" data-toggle="tab" data-step="{{ step.number }}">
       <span class="nav-pills__text" {% if step.number == active_step %} aria-label="{{ 'current step is'|t }} {{ step.title }}"{% endif %}>
-{#      <span class="nav-pills__text" aria-label="{{ 'current step is'|t }} {{ step.title }}">#}
         <span class="number">{{ step.number }}</span>
         <a {{ step_attributes }} class="sr-only-focusable" href="#">{{ step.title }}</a>
       </span>
