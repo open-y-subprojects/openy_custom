@@ -105,17 +105,17 @@ class CalcBlockForm extends FormBase {
       [
         'title' => $this->t('Membership Type'),
         'number' => '1',
-        'active' => $step >= 1 ? TRUE : FALSE,
+        'active' => $step === 1,
       ],
       [
         'title' => $this->t('Primary Location'),
         'number' => '2',
-        'active' => $step >= 2 ? TRUE : FALSE,
+        'active' => $step === 2,
       ],
       [
         'title' => $this->t('Summary'),
         'number' => '3',
-        'active' => $step == 3 ? TRUE : FALSE,
+        'active' => $step == 3,
       ],
     ];
     $header = [
@@ -127,14 +127,21 @@ class CalcBlockForm extends FormBase {
       '#markup' => $header,
     ];
 
+    $form['membership_calc_body'] = [
+      '#type' => 'container',
+      '#attributes' => [
+        'class' => ['membership-calc__body'],
+      ],
+    ];
+
     switch ($step) {
       case 1:
         // Membership type step.
-        $form['type'] = [
+        $form['membership_calc_body']['type'] = [
           '#element_variables' => $types,
           '#subtype' => 'membership_type_radio',
           '#type' => 'calc_radios',
-          '#title' => $this->t('Which option best describes the type of membership you need?'),
+          '#title' =>  '<h3>' . $this->t('Choose your membership type') . '</h3>',
           '#options' => $types_options,
           '#default_value' => $storage['type'] ?? NULL,
         ];
@@ -142,27 +149,34 @@ class CalcBlockForm extends FormBase {
 
       case 2:
         // Select branch step.
-        $form['map'] = [
-          '#type' => 'openy_map',
-          '#element_variables' => $this->dataWrapper->getBranchPins(),
-        ];
         $locations = $this->dataWrapper->getLocations();
         $locations_options = [];
+        $locations_options[0] = $this->t('Choose location');
         foreach ($locations as $id => $location) {
           $locations_options[$id] = $location['title'];
         }
-        $form['location'] = [
-          '#type' => 'radios',
-          '#title' => $this->t('Location'),
+        $form['membership_calc_body']['#prefix'] = '<h4 class="step-title">' . $this->t('Find your primary location') . '</h4>';
+
+        $form['membership_calc_body']['location'] = [
+          '#type' => 'select',
+          '#title' => $this->t('Find your primary location'),
           '#options' => $locations_options,
+          '#description' => $this->t('Use the map as a guide to find your most convenient location.'),
           '#default_value' => $storage['location'] ?? NULL,
+        ];
+
+        $form['membership_calc_body']['map'] = [
+          '#type' => 'openy_map',
+          '#element_variables' => $this->dataWrapper->getBranchPins(),
+          '#prefix' => '<div class="map-wrapper">',
+          '#suffix' => '</div>',
         ];
         break;
 
       case 3:
         // Summary step.
         $summary = $this->dataWrapper->getSummary($storage['location'], $storage['type']);
-        $form['summary'] = [
+        $form['membership_calc_body']['summary'] = [
           '#theme' => 'openy_calc_form_summary',
           '#result' => $summary,
           '#map' => [
@@ -173,10 +187,13 @@ class CalcBlockForm extends FormBase {
         break;
     }
 
+    $form['actions']['#prefix'] = "<div class='membership-calc__footer step-{$step}'>";
+    $form['actions']['#suffix'] = '</div>';
+
     if ($step > 1) {
       $form['actions']['prev'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Prev'),
+        '#value' => $this->t('Back'),
         '#name' => 'step-' . ($step - 1),
         '#submit' => [[$this, 'navButtonSubmit']],
         '#ajax' => $this->getAjaxDefaults(),
@@ -202,7 +219,7 @@ class CalcBlockForm extends FormBase {
     elseif (isset($summary['link'])) {
       $form['actions']['submit'] = [
         '#type' => 'submit',
-        '#value' => $this->t('Complete registration'),
+        '#value' => $this->t('Complete'),
         '#attributes' => [
           'class' => [
             'btn',
@@ -212,7 +229,7 @@ class CalcBlockForm extends FormBase {
         ],
       ];
     }
-    $form['#attached']['library'][] = 'openy_calc/scripts';
+    $form['#attached']['library'][] = 'openy_calc/main';
     return $form;
   }
 
@@ -251,7 +268,7 @@ class CalcBlockForm extends FormBase {
     if ($trigger['#name'] == 'step-2'
       && empty($storage['type'])
       && $form_state->isValueEmpty('type')) {
-      $form_state->setErrorByName('type', $this->t('Which option best describes the type of membership you need?'));
+      $form_state->setErrorByName('type', $this->t('Choose your membership type'));
     }
 
     if ($trigger['#name'] == 'step-3' && $form_state->isValueEmpty('location')) {
