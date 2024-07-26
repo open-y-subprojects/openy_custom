@@ -7,7 +7,6 @@
 
 use Drupal\Core\Render\Markup;
 use Drupal\node\NodeInterface;
-use Drupal\lb_branch_hours_blocks\HoursToday;
 
 /**
  * Implements hook_theme().
@@ -81,10 +80,6 @@ function openy_calc_preprocess_node__branch__calc_summary(&$variables) {
   if(!$node instanceof NodeInterface) {
     return;
   }
-//$branchHoursTodayHelper = \Drupal::service('lb_branch_hours_blocks.hours_today');
-//$branchHoursHelper = \Drupal::service('y_branch.hours_helper');
-//  $holiday_hours = $branchHoursHelper->getBranchHolidayHours($node);
-//  $branch_hours = $branchHoursHelper->getBranchHours($node);
 
   $variables['branch'] = [
     'branch_name' => [

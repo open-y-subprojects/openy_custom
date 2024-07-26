@@ -8,9 +8,9 @@
  */
 #}
 <div class="membership-calc__header">
-  <h2 tabindex="0" class="display-6 mb-3">{{ 'Membership Calculator'|t }}</h2>
+  <h2 tabindex="0">{{ 'Membership Calculator'|t }}</h2>
 
-  <ul role="tablist" aria-label="{{ 'Membership options selection'|t }}" class="nav nav-pills nav-fill mb-5">
+  <ul role="tablist" aria-label="{{ 'Membership options selection'|t }}" class="nav nav-pills nav-fill">
     {% for step in steps %}
       {% if step.active %}
         {% set active_step = step.number %}

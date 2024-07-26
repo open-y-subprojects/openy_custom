@@ -224,9 +224,9 @@ class DataWrapper implements OpenyDataServiceInterface {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   An object of the Membership node.
    *
-   * @return mixed|null
-   *   A value of the field.
-   */
+   * @return array|null
+   *   A render array for the image or NULL if no image is found.
+ */
   private function getImage(EntityInterface $entity): mixed {
     $media = $entity->get('field_mbrshp_image')->referencedEntities();
     $media = reset($media);
@@ -244,9 +244,9 @@ class DataWrapper implements OpenyDataServiceInterface {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   An object of the Membership node.
    *
-   * @return mixed|null
-   *   A value of the field.
-   */
+   * @return array|null
+   *   A render array for the description or NULL if no description is found.
+ */
   private function getDescription(EntityInterface $entity): mixed {
     if ($entity->get('field_mbrshp_description')->isEmpty()) {
       return NULL;

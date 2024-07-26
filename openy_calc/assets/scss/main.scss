@@ -17,14 +17,6 @@ a[href="#step2"] {
   border-radius: var(--wsBorderRadius, 10px);
   border: solid 1px var(--y-color-light-grey-2, #e7e7e7);
 
-  h2 {
-    font-family: var(--ylb-font-family-medium), serif;
-    font-weight: 500;
-    font-size: 48px;
-    line-height: 54px;
-    text-align: center;
-  }
-
   .nav-pills {
     font-family: var(--ylb-font-family-medium), serif;
     font-weight: 500;
@@ -45,9 +37,14 @@ a[href="#step2"] {
     & > li.nav-item {
       text-align: left;
       flex: initial;
+      width: 100%;
+
+      @include media-breakpoint-up(md) {
+        width: calc((100% / 3) - 1rem);
+      }
 
       .step {
-        width: 276px;
+        width: 100%;
         padding: 10px 20px;
         border: 1px solid var(--wsPrimaryColor, gray);
         border-radius: var(--wsBorderRadius, 10px);
@@ -97,6 +94,20 @@ a[href="#step2"] {
     border-top-right-radius: var(--wsBorderRadius, 10px);
     border-top-left-radius: var(--wsBorderRadius, 10px);
     box-shadow: var(--wsBorderStyle, unset);
+
+    h2 {
+      font-family: var(--ylb-font-family-medium), serif;
+      font-weight: 500;
+      font-size: 35px;
+      line-height: 42px;
+      text-align: center;
+      margin-bottom: 36px;
+
+      @include media-breakpoint-up(md) {
+        font-size: 48px;
+        line-height: 54px;
+      }
+    }
   }
 
   .step-title {
@@ -298,7 +309,6 @@ a[href="#step2"] {
               margin-bottom: 16px;
 
               img {
-                //max-height: 144px;
                 height: 100%;
                 width: 100%;
                 border-top-right-radius: 8px;
@@ -324,10 +334,6 @@ a[href="#step2"] {
 
       .calc-summary {
         color: var(--y-color-black, #000);
-        //a {
-        //
-        //}
-        //color: var(--y-color-black, #000);
       }
     }
 
@@ -341,8 +347,6 @@ a[href="#step2"] {
       padding: 36px;
 
       &-col {
-        //min-height: 440px;
-
         .title {
           font-family: var(--ylb-font-family-medium), serif;
           font-weight: 500;
@@ -369,6 +373,11 @@ a[href="#step2"] {
           font-size: 24px;
           line-height: 30px;
           padding-bottom: 24px;
+
+          &.title {
+            font-size: 32px;
+            line-height: 34px;
+          }
         }
 
         .info-card {
@@ -444,9 +453,7 @@ a[href="#step2"] {
         }
 
         .card {
-          //min-height: 380px;
           min-height: fit-content;
-
 
           .membership-price-wrapper {
             display: flex;
@@ -581,14 +588,4 @@ a[href="#step2"] {
 
 .membership-continue {
   display: none;
-}
-
-.price-month {
-  //margin-top: 20px;
-  //margin-bottom: 10px;
-  //font-size: $h2-font-size;
-  //font-family: $font-family-sans-serif;
-  //font-weight: 500;
-  //line-height: 1.1;
-  //color: inherit;
 }

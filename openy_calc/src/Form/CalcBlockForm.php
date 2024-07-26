@@ -4,6 +4,7 @@ namespace Drupal\openy_calc\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Markup;
 use Drupal\Core\Render\RendererInterface;
 use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\openy_socrates\OpenySocratesFacade;
@@ -141,7 +142,7 @@ class CalcBlockForm extends FormBase {
           '#element_variables' => $types,
           '#subtype' => 'membership_type_radio',
           '#type' => 'calc_radios',
-          '#title' =>  '<h3>' . $this->t('Choose your membership type') . '</h3>',
+          '#title' => Markup::create('<h3>' . $this->t('Choose your membership type') . '</h3>'),
           '#options' => $types_options,
           '#default_value' => $storage['type'] ?? NULL,
         ];
@@ -152,10 +153,13 @@ class CalcBlockForm extends FormBase {
         $locations = $this->dataWrapper->getLocations();
         $locations_options = [];
         $locations_options[0] = $this->t('Choose location');
+        $locations_options = [0 => $this->t('Choose location')] + array_map(function ($location) {
+            return $location['title'];
+          }, $locations);
         foreach ($locations as $id => $location) {
           $locations_options[$id] = $location['title'];
         }
-        $form['membership_calc_body']['#prefix'] = '<h4 class="step-title">' . $this->t('Find your primary location') . '</h4>';
+        $form['membership_calc_body']['#prefix'] = Markup::create('<h4 class="step-title">' . $this->t('Find your primary location') . '</h4>');
 
         $form['membership_calc_body']['location'] = [
           '#type' => 'select',
