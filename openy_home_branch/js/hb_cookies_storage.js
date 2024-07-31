@@ -30,10 +30,12 @@
 
       // Get locations list.
       var self = this;
-      if(!drupalSettings.home_branch.hb_menu_selector) {
+      if (!drupalSettings.home_branch.hb_menu_selector && !drupalSettings.home_branch.hb_header_lb_selector) {
         return;
       }
-      self.locations = drupalSettings.home_branch.hb_menu_selector.locations;
+      self.locations = drupalSettings.home_branch.hb_menu_selector
+        ? drupalSettings.home_branch.hb_menu_selector.locations
+        : drupalSettings.home_branch.hb_header_lb_selector.locations;
       setTimeout(function() {
         self.attachPlugins();
       }, 0);

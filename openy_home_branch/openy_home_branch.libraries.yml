@@ -1,5 +1,5 @@
 cookies_storage:
-  version: 0.3
+  version: 0.4
   js:
     js/hb_cookies_storage.js: {}
   dependencies:
