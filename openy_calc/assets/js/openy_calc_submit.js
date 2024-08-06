@@ -10,7 +10,7 @@
   Drupal.behaviors.openy_calc_scroll = {
     attach: function (context, settings) {
       once('openy-calc-scroll', '#membership-calc-wrapper').forEach((wrapper) => {
-        var divPosition = $(wrapper).offset();
+        let divPosition = $(wrapper).offset();
         $('html, body').animate({scrollTop: divPosition.top - 100}, "slow");
       });
     }
@@ -22,7 +22,8 @@
   Drupal.behaviors.openy_calc_focus = {
     attach: function (context, settings) {
       //After ajax response rendered input[name="step-3"] button is focused, we need to wait for that.
-      var nextButton = $('input[name="step-3"]');
+
+      let nextButton = $('input[name="step-3"]');
       if(nextButton.length) {
         nextButton.on('focus', function () {
           $('a[role="tab"][aria-selected=true]').focus();
@@ -32,5 +33,4 @@
       }
     }
   };
-
 })(Drupal, jQuery, once);
