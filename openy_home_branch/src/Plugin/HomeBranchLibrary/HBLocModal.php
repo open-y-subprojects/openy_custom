@@ -6,6 +6,7 @@ use Drupal\Core\StringTranslation\StringTranslationTrait;
 use Drupal\openy_home_branch\HomeBranchLibraryBase;
 use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Config\ConfigFactoryInterface;
+use Drupal\ws_home_branch\Plugin\HomeBranchLibrary\HBHeaderLBSelector;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
@@ -68,8 +69,11 @@ class HBLocModal extends HomeBranchLibraryBase implements ContainerFactoryPlugin
    * {@inheritdoc}
    */
   public function isAllowedForAttaching($variables) {
-    // We need same rules as HBMenuSelector.
-    return ($variables['plugin_id'] == HBMenuSelector::BLOCK_ID);
+    // We have to apply this plugin for different selectors.
+    return in_array(
+      $variables['plugin_id'],
+      [HBMenuSelector::BLOCK_ID, HBHeaderLBSelector::BLOCK_ID]
+    );
   }
 
   /**
@@ -77,7 +81,7 @@ class HBLocModal extends HomeBranchLibraryBase implements ContainerFactoryPlugin
    */
   public function getLibrarySettings() {
     $config = $this->configFactory->get('openy_home_branch.settings');
-    $title = $config->get('popup_title');
+    $title = $config->get('popup_title') ?? $this->t('Set preferred location');
     $description = $config->get('popup_description');
     $learn_more = $config->get('popup_learn_more');
     $delay = $config->get('popup_delay');
