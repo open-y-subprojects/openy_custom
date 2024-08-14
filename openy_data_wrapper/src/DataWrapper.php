@@ -2,6 +2,7 @@
 
 namespace Drupal\openy_data_wrapper;
 
+use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Language\LanguageManagerInterface;
 use Drupal\Core\Url;
 use Drupal\openy_socrates\OpenyDataServiceInterface;
@@ -194,14 +195,14 @@ class DataWrapper implements OpenyDataServiceInterface {
     }
 
     $storage = $this->entityTypeManager->getStorage('node');
-    $builder = $this->entityTypeManager->getViewBuilder('node');
     $memberships = $storage->loadMultiple($membership_ids);
 
     foreach ($memberships as $membership) {
       $membership_id = $membership->id();
       $types[$membership_id] = [
-        'title' => $membership->title->value,
-        'description' => $builder->view($membership, 'calc_preview'),
+        'title' => $membership?->label(),
+        'image' => $this->getImage($membership),
+        'description' => $this->getDescription($membership),
       ];
     }
 
@@ -215,6 +216,44 @@ class DataWrapper implements OpenyDataServiceInterface {
    */
   public function getBranchPins($id = NULL) {
     return $this->getPins('branch', $id);
+  }
+
+  /**
+   * Gets value for image field of template.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   An object of the Membership node.
+   *
+   * @return array|null
+   *   A render array for the image or NULL if no image is found.
+ */
+  private function getImage(EntityInterface $entity): mixed {
+    $media = $entity->get('field_mbrshp_image')->referencedEntities();
+    $media = reset($media);
+    if (!$media) {
+      return NULL;
+    }
+
+    $builder = $this->entityTypeManager->getViewBuilder('media');
+    return $builder->view($media, 'calc_preview');
+  }
+
+  /**
+   * Gets value for description field of template.
+   *
+   * @param \Drupal\Core\Entity\EntityInterface $entity
+   *   An object of the Membership node.
+   *
+   * @return array|null
+   *   A render array for the description or NULL if no description is found.
+ */
+  private function getDescription(EntityInterface $entity): mixed {
+    if ($entity->get('field_mbrshp_description')->isEmpty()) {
+      return NULL;
+    }
+
+    $value = $entity->get('field_mbrshp_description')->first()->getValue();
+    return check_markup($value['value'], $value['format']);
   }
 
   /**

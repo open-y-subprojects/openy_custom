@@ -1,16 +1,19 @@
-scripts:
-  version: 1.0
+main:
+  version: 1.1
+  css:
+    theme:
+      assets/css/main.css: { preprocess: true }
   js:
-    js/openy_calc.js: {}
+    assets/js/openy_calc.js: {}
   dependencies:
     - core/jquery
     - core/drupal
     - core/drupalSettings
 
 submit:
-  version: 1.0
+  version: 1.1
   js:
-    js/openy_calc_submit.js: {}
+    assets/js/openy_calc_submit.js: { minified: false }
   dependencies:
     - core/jquery
     - core/once
