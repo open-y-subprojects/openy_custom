@@ -93,14 +93,14 @@ function openy_calc_preprocess_node__branch__calc_summary(&$variables) {
       '#type' => 'inline_template',
       '#template' => '<a href="tel:{{ branch_phone }}"><i class="fa fa-phone" aria-hidden="true"></i><div>{{ branch_phone }}</div></a>',
       '#context' => [
-        'branch_phone' => $node?->get('field_location_phone')->value,
+        'branch_phone' => $node->get('field_location_phone')->value,
       ],
     ],
     'branch_fax' => [
       '#type' => 'inline_template',
       '#template' => '{% if branch_fax  %}<a href="tel:{{ branch_fax }}"><i class="fa fa-phone" aria-hidden="true"></i><div>{{ branch_fax }}</div></a> {% endif %}',
       '#context' => [
-        'branch_fax' => $node?->get('field_location_fax')->value,
+        'branch_fax' => $node->get('field_location_fax')->value,
       ],
     ],
     'branch_address' => [
@@ -114,7 +114,7 @@ function openy_calc_preprocess_node__branch__calc_summary(&$variables) {
       '#type' => 'inline_template',
       '#template' => '{% if branch_email %}<a href="mailto:{{ branch_email }}"><i class="fas fa-envelope"></i><div>{{ branch_email }}</div></a>{% endif %}',
       '#context' => [
-        'branch_email' => $node?->get('field_location_email')->value,
+        'branch_email' => $node->get('field_location_email')->value,
       ],
     ],
     'branch_today_hours' => [

@@ -13,7 +13,7 @@ main:
 submit:
   version: 1.1
   js:
-    assets/js/openy_calc_submit.js: {}
+    assets/js/openy_calc_submit.js: { minified: false }
   dependencies:
     - core/jquery
     - core/once
