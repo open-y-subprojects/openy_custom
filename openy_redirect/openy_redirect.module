@@ -124,15 +124,6 @@ function openy_redirect_submit($form, FormStateInterface $form_state) {
   $redirectSources = $form_state->getValue('redirect');
 
   $node_url = $node->toUrl()->getInternalPath();
-  $redirect_url = 'internal:/' . $node_url;
-  // Delete all redirects for this node to save it from scratch later.
-  $redirects = openy_redirect_load_redirects_by_redirect_uri($redirect_url, $language);
-  if (!empty($redirects)) {
-    /** @var \Drupal\redirect\Entity\Redirect $item */
-    foreach ($redirects as $item) {
-      $item->delete();
-    }
-  }
 
   /** @var \Drupal\redirect\RedirectRepository $redirect_repository */
   $redirect_repository = \Drupal::service('redirect.repository');
