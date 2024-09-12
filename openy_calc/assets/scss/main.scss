@@ -40,7 +40,7 @@ a[href="#step2"] {
       flex: initial;
       width: 100%;
 
-      @include media-breakpoint-up(md) {
+      @include media-breakpoint-up(xl) {
         width: calc((100% / 3) - 1rem);
       }
 
@@ -260,6 +260,7 @@ a[href="#step2"] {
 
           @include media-breakpoint-down(md) {
             min-width: 90%;
+            padding: 0;
           }
 
           .card {
@@ -268,7 +269,7 @@ a[href="#step2"] {
             padding-bottom: 16px;
             border-radius: var(--membership_calc-border-radius, 8px);
             border: none;
-            padding-top: 0;
+            padding-top: 24px;
             overflow: hidden;
 
             &:has(input[name=type]:focus) {
@@ -332,14 +333,19 @@ a[href="#step2"] {
             }
 
             &-image {
-              margin: 0 -20px 16px;
-              max-height: 131px;
+              margin-bottom: 16px;
+              height: 131px;
+              width: 131px;
+              align-self: center;
+              border-radius: 50%;
+              background: var(--ylb-color-light-grey-3, lightgray);
 
               img {
-                height: 131px;
-                width: 100%;
-                border-top-right-radius: 8px;
-                border-top-left-radius: 8px;
+                height: 94px;
+                width: 94px;
+                border-radius: 50%;
+                margin: 18px;
+                background: var(--wsTertiaryColor, gray);
               }
             }
           }
@@ -370,8 +376,12 @@ a[href="#step2"] {
       width: 100%;
       align-content: center;
       justify-content: space-evenly;
-      align-items: flex-start;
+      align-items: stretch;
       padding: 36px;
+
+      @include media-breakpoint-down(lg) {
+        padding: 0;
+      }
 
       &-col {
         .title {
@@ -468,6 +478,8 @@ a[href="#step2"] {
       .selected-membership {
         width: calc(100% / 3 * 2);
         padding-left: 18px;
+        display: flex;
+        flex-direction: column;
 
         .membership-title {
           font-family: var(--ylb-font-family-medium), serif;
@@ -492,6 +504,7 @@ a[href="#step2"] {
         }
 
         .card {
+          flex: 1;
           min-height: fit-content;
 
           .membership-price-wrapper {
@@ -500,6 +513,7 @@ a[href="#step2"] {
             justify-content: space-between;
             align-items: center;
             gap: 24px;
+            flex: 1;
 
             .price {
               background-color: var(--wsPartnerColor, gray);
@@ -513,6 +527,8 @@ a[href="#step2"] {
               flex-direction: column;
               min-width: 0;
               word-wrap: break-word;
+              justify-content: center;
+              height: 100%;
 
               h4 {
                 color: var(--y-color-white);
