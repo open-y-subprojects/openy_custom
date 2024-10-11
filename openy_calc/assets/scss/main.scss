@@ -427,6 +427,9 @@ a[href="#step2"] {
             -moz-column-gap: 0.5rem;
             column-gap: 0.5rem;
           }
+          .branch-email a div {
+            word-break: break-word;
+          }
 
           .branch-address {
             label {
