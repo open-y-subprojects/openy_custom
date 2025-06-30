@@ -273,7 +273,6 @@ class DataWrapper implements OpenyDataServiceInterface {
       ->accessCheck(FALSE)
       ->condition('type', 'branch')
       ->condition('langcode', $langcode)
-      ->condition('status', 1)
       ->addTag('data_wrapper_locations')
       ->execute();
 
