@@ -6,6 +6,10 @@ use Drupal\migrate\MigrateMessage;
 use Drupal\migrate\Plugin\Migration;
 use Drupal\migrate\Plugin\MigrationPluginManager;
 use Drupal\migrate_tools\MigrateExecutable;
+use Drupal\Core\KeyValueStore\KeyValueFactoryInterface;
+use Drupal\Core\StringTranslation\TranslationManager;
+use Drupal\Component\Datetime\TimeInterface;
+
 
 /**
  * Class Importer.
@@ -27,7 +31,12 @@ class Importer implements ImporterInterface {
    * @param \Drupal\migrate\Plugin\MigrationPluginManager $migrationManager
    *   Migration manager.
    */
-  public function __construct(MigrationPluginManager $migrationManager) {
+  public function __construct(
+    MigrationPluginManager $migrationManager,
+    protected readonly KeyValueFactoryInterface $keyValue,
+    protected readonly TimeInterface $time,
+    protected readonly TranslationManager $translation,
+  ) {
     $this->migrationManager = $migrationManager;
   }
 
@@ -47,7 +56,15 @@ class Importer implements ImporterInterface {
     }
 
     $message = new MigrateMessage();
-    $executable = new MigrateExecutable($migration, $message);
+    
+    $executable = new MigrateExecutable(
+      $migration,
+      $message,
+      $this->keyValue,
+      $this->time,
+      $this->translation,
+      $options = []
+    );
     $executable->import();
   }
 
@@ -67,7 +84,14 @@ class Importer implements ImporterInterface {
     }
 
     $message = new MigrateMessage();
-    $executable = new MigrateExecutable($migration, $message);
+    $executable = new MigrateExecutable(
+      $migration,
+      $message,
+      $this->keyValue,
+      $this->time,
+      $this->translation,
+      $options = []
+    );
     $executable->rollback();
   }
 
