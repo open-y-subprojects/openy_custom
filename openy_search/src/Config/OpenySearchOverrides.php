@@ -44,7 +44,7 @@ class OpenySearchOverrides implements ConfigFactoryOverrideInterface {
    * {@inheritdoc}
    */
   public function loadOverrides($names) {
-    $default_theme = $this->configFactory->getEditable('system.theme')->getOriginal('default');
+    $default_theme = NULL;
     if (\Drupal::hasService('domain.negotiator')) {
       /* @var \Drupal\domain\DomainNegotiatorInterface $domain_negotiator */
       $domain_negotiator = \Drupal::service('domain.negotiator');
@@ -54,6 +54,9 @@ class OpenySearchOverrides implements ConfigFactoryOverrideInterface {
             ->getOriginal('default');
         }
       }
+    }
+    if (!$default_theme) {
+      $default_theme = $this->configFactory->getEditable('system.theme')->getOriginal('default');
     }
     $overrides = [];
     if (in_array($default_theme . '.settings', $names)) {

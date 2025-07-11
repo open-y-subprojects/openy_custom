@@ -2,6 +2,8 @@
 
 namespace Drupal\openy_system;
 
+use Drupal\Component\Utility\DeprecationHelper;
+use Drupal\Core\Utility\Error;
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Logger\RfcLogLevel;
 use Drupal\Core\Config\FileStorage;
@@ -158,12 +160,17 @@ class OpenyModulesManager {
           $config_entity_type_bundle->delete();
         }
         catch (\Exception $e) {
-          watchdog_exception('openy', $e, "Error! Can't delete config entity
+          DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => Error::logException(\Drupal::logger('openy'), $e, "Error! Can't delete config entity
           @config_entity_type bundle <b>@bundle</b>, please @remove.", [
             '@config_entity_type' => $config_entity_type,
             '@bundle' => $bundle,
             '@remove' => $this->getLink($config_entity_type, 'remove it manually', $bundle),
-          ], RfcLogLevel::NOTICE);
+          ], RfcLogLevel::NOTICE), fn() => watchdog_exception('openy', $e, "Error! Can't delete config entity
+          @config_entity_type bundle <b>@bundle</b>, please @remove.", [
+            '@config_entity_type' => $config_entity_type,
+            '@bundle' => $bundle,
+            '@remove' => $this->getLink($config_entity_type, 'remove it manually', $bundle),
+          ], RfcLogLevel::NOTICE));
         }
       }
     }
@@ -210,7 +217,7 @@ class OpenyModulesManager {
             $url = Url::fromUserInput("/$parent_type/$parent_id/edit");
             $link = Link::fromTextAndUrl('parent node', $url)->toRenderable();
 
-            watchdog_exception('openy', $e, "Error! Can't delete @entity_type bundle <b>@bundle</b>,
+            DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => Error::logException(\Drupal::logger('openy'), $e, "Error! Can't delete @entity_type bundle <b>@bundle</b>,
             please edit @parentEntity and remove this paragraph manually.<br>
             After this @removeBundle @config_entity_type bundle <b>@bundle</b>.", [
               '@entity_type' => $content_entity_type,
@@ -219,7 +226,16 @@ class OpenyModulesManager {
               '@ids' => implode(', ', $ids),
               '@parentEntity' => \Drupal::service('renderer')->render($link),
               '@removeBundle' => $this->getLink($config_entity_type, 'delete config entity', $bundle),
-            ], RfcLogLevel::NOTICE);
+            ], RfcLogLevel::NOTICE), fn() => watchdog_exception('openy', $e, "Error! Can't delete @entity_type bundle <b>@bundle</b>,
+            please edit @parentEntity and remove this paragraph manually.<br>
+            After this @removeBundle @config_entity_type bundle <b>@bundle</b>.", [
+              '@entity_type' => $content_entity_type,
+              '@config_entity_type' => $config_entity_type,
+              '@bundle' => $bundle,
+              '@ids' => implode(', ', $ids),
+              '@parentEntity' => \Drupal::service('renderer')->render($link),
+              '@removeBundle' => $this->getLink($config_entity_type, 'delete config entity', $bundle),
+            ], RfcLogLevel::NOTICE));
             $operation_success = FALSE;
           }
           // Check that parent entity type is not paragraph.
@@ -251,7 +267,7 @@ class OpenyModulesManager {
           $storage_handler->delete($entities);
         }
         catch (\Exception $e) {
-          watchdog_exception('openy', $e, "Error! Can't delete content related
+          DeprecationHelper::backwardsCompatibleCall(\Drupal::VERSION, '10.1.0', fn() => Error::logException(\Drupal::logger('openy'), $e, "Error! Can't delete content related
           to @entity_type bundle <b>@bundle</b>, please @removeContent (Entity ID's - @ids).<br>
           After this @removeBundle @config_entity_type bundle <b>@bundle</b>.", [
             '@entity_type' => $content_entity_type,
@@ -260,7 +276,16 @@ class OpenyModulesManager {
             '@ids' => implode(', ', $ids),
             '@removeContent' => $this->getLink($content_entity_type, 'remove it manually'),
             '@removeBundle' => $this->getLink($config_entity_type, 'delete config entity', $bundle),
-          ], RfcLogLevel::NOTICE);
+          ], RfcLogLevel::NOTICE), fn() => watchdog_exception('openy', $e, "Error! Can't delete content related
+          to @entity_type bundle <b>@bundle</b>, please @removeContent (Entity ID's - @ids).<br>
+          After this @removeBundle @config_entity_type bundle <b>@bundle</b>.", [
+            '@entity_type' => $content_entity_type,
+            '@config_entity_type' => $config_entity_type,
+            '@bundle' => $bundle,
+            '@ids' => implode(', ', $ids),
+            '@removeContent' => $this->getLink($content_entity_type, 'remove it manually'),
+            '@removeBundle' => $this->getLink($config_entity_type, 'delete config entity', $bundle),
+          ], RfcLogLevel::NOTICE));
           $operation_success = FALSE;
         }
       }
