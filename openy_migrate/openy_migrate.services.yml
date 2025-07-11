@@ -3,3 +3,6 @@ services:
     class: 'Drupal\openy_migrate\Importer'
     arguments:
       - '@plugin.manager.migration'
+      - '@keyvalue'
+      - '@datetime.time'
+      - '@string_translation'
