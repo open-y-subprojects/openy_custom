@@ -16,7 +16,7 @@ class ResponseEventSubscriber implements EventSubscriberInterface {
   /**
    * {@inheritdoc}
    */
-  public static function getSubscribedEvents() {
+  public static function getSubscribedEvents(): array {
     // Run Event on the latest stage, after all modules did their modifications
     // to Headers.
     $events[KernelEvents::RESPONSE][] = ['onRespond', -1000];
