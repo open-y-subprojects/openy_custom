@@ -37,7 +37,10 @@
 
     // Open popup.
     open_popup: function () {
-      $('a.location-popup-link').once().click();
+      once('location-popup', 'a.location-popup-link', context).forEach(function (el) {
+        el.click();
+      });
+
       $(document).on('click', 'body > .ui-widget-overlay', function () {
         return false;
       });
