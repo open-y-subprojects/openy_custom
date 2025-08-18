@@ -4,8 +4,7 @@ openy_schedules:
     js/openy_schedules.js: {}
   dependencies:
     - core/jquery
-    - core/jquery.once
-    - core/jquery.cookie
+    - core/once
     - core/drupal
     - core/drupalSettings
     - core/jquery.ui.core
