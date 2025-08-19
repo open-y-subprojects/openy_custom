@@ -1,6 +1,15 @@
 (function($) {
   "use strict";
 
+  function getCookie(name) {
+    const nameEQ = name + "=";
+    const ca = document.cookie.split(";");
+    for (let i = 0; i < ca.length; i++) {
+      let c = ca[i].trim();
+      if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+    }
+    return null;
+  }
   /**
    * Triggered by AJAX action for updating browser URL query options and browser's history.
    *
@@ -76,23 +85,22 @@
         }
       });
 
-      $(document)
-        .once()
-        .ajaxSuccess(function(e, xhr, settings) {
-          if (settings.data !== undefined && settings.data.match('form_id=openy_schedules_search_form')) {
-            var form = $('.openy-schedules-search-form');
-            form.find('.js-form-type-select select').removeAttr('readonly');
-            form.find(':input.openy-schedule-datepicker').removeAttr('readonly');
-            form.find('.filters-container').addClass('hidden');
-            if (form.find('.filter').length !== 0) {
-              form.find('.filters-container').removeClass('hidden');
-            }
-            form.find('.add-filters').removeClass('hidden');
-            form.find('.close-filters').addClass('hidden');
-            form.find('.selects-container').addClass('hidden-xs');
+    once('openy-schedules-ajax-success', document).forEach(function () {
+      $(document).ajaxSuccess(function (e, xhr, settings) {
+        if (settings.data && settings.data.match('form_id=openy_schedules_search_form')) {
+          var form = $('.openy-schedules-search-form');
+          form.find('.js-form-type-select select').removeAttr('readonly');
+          form.find(':input.openy-schedule-datepicker').removeAttr('readonly');
+          form.find('.filters-container').addClass('hidden');
+          if (form.find('.filter').length !== 0) {
+            form.find('.filters-container').removeClass('hidden');
           }
-        });
-
+          form.find('.add-filters').removeClass('hidden');
+          form.find('.close-filters').addClass('hidden');
+          form.find('.selects-container').addClass('hidden-xs');
+        }
+      });
+    });
       $('.schedule-sessions-group-slider').each(function() {
         var view = $(this);
 
@@ -188,12 +196,11 @@
             form.find('.js-form-submit').trigger('click');
           });
 
-        // Handle preferred location.
-        setTimeout(function() {
-          var preferred_branch = $.cookie('openy_preferred_branch');
-          var query = getUrlParams(window.location.href);
-          var location = query['location'];
-          if (typeof location === 'undefined' && typeof preferred_branch !== 'undefined') {
+      // Handle preferred location.
+      setTimeout(function () {
+          const preferred_branch = getCookie('openy_preferred_branch');
+          const location = getUrlParams(window.location.href)['location'];
+          if (location === undefined && preferred_branch !== null) {
             form.find('.js-form-item-location select')
               .val(preferred_branch)
               .trigger('change');
@@ -201,8 +208,8 @@
         }, 0);
       });
 
-      $('.schedule-sessions-group').once().each(function() {
-        var group = $(this);
+      once('schedule-sessions-group', '.schedule-sessions-group', context).forEach(function (el) {
+        var group = $(el);
 
         var form = $('.openy-schedules-search-form'),
           input = form.find('input[name="date"]');
@@ -210,14 +217,16 @@
         var filter_date_string = input.val().split('/'),
           filter_date = new Date(filter_date_string[2], filter_date_string[0] - 1, filter_date_string[1]),
           today = new Date();
-          today.setHours(0,0,0,0);
+          today.setHours(0, 0, 0, 0);
+
         if (today >= filter_date) {
           group.find('.prev-week').addClass('hidden');
         }
         else {
           group.find('.prev-week').removeClass('hidden');
         }
-        group.find('.week-control').on('click', function(e) {
+
+        group.find('.week-control').on('click', function (e) {
           e.preventDefault();
           if (!$(this).hasClass('week-control-processing')) {
             var current_date = input.val().split('/'),
@@ -239,7 +248,8 @@
             var filter_date_string = input.val().split('/'),
               filter_date = new Date(filter_date_string[2], filter_date_string[0] - 1, filter_date_string[1]),
               today = new Date();
-              today.setHours(0,0,0,0);
+              today.setHours(0, 0, 0, 0);
+
             if (today >= filter_date) {
               group.find('.prev-week').addClass('hidden');
             }
@@ -253,9 +263,9 @@
   };
 
   Drupal.behaviors.openy_schedules_removeUnneededAria = {
-    attach: function (context, settings) {
-      $('.schedule-sessions-group-slider .slick-slide', context).once().each(function () {
-        $(this).removeAttr('role');
+   attach: function (context) {
+      once('remove-aria', '.schedule-sessions-group-slider .slick-slide', context).forEach(function (el) {
+        $(el).removeAttr('role');
       });
     }
   };
