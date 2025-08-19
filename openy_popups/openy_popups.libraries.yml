@@ -7,5 +7,6 @@ openy_popups.autoload:
       css/popup.css: {}
   dependencies:
     - core/drupal.dialog.ajax
-    - core/jquery.cookie
+    - core/jquery
+    - core/once
     - core/drupalSettings
