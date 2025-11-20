@@ -383,7 +383,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -400,7 +400,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -417,7 +417,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -434,7 +434,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -453,7 +453,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -472,7 +472,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -489,7 +489,7 @@ class SchedulesSearchForm extends FormBase {
         'callback' => [$this, 'rebuildAjaxCallback'],
         'wrapper' => 'schedules-search-form-wrapper',
         'event' => 'change',
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'effect' => 'fade',
         'progress' => [
           'type' => 'throbber',
@@ -516,7 +516,7 @@ class SchedulesSearchForm extends FormBase {
       '#value' => $this->t('Apply filters'),
       '#ajax' => [
         'callback' => [$this, 'rebuildAjaxCallback'],
-        'method' => 'replace',
+        'method' => 'replaceWith',
         'event' => 'click',
       ],
     ];
