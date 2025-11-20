@@ -69,6 +69,7 @@ class CalcBlockForm extends FormBase {
     return [
       'callback' => [$this, 'rebuildAjaxCallback'],
       'wrapper' => 'membership-calc-wrapper',
+      'method' => 'replaceWith',
       'effect' => 'fade',
       'progress' => ['type' => 'throbber'],
     ];
