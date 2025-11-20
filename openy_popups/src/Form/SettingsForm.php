@@ -2,6 +2,7 @@
 
 namespace Drupal\openy_popups\Form;
 
+use Drupal\file\FileInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Drupal\file\Entity\File;
@@ -77,7 +78,7 @@ class SettingsForm extends ConfigFormBase {
       // Save image.
       $image = array_values($form_image);
       $file = File::load(array_shift($image));
-      $file->status = FILE_STATUS_PERMANENT;
+      $file->status = FileInterface::STATUS_PERMANENT;
       $file->save();
 
       // Set configuration.

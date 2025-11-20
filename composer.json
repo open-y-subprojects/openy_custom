@@ -1,5 +1,6 @@
 {
   "name": "open-y-subprojects/openy_custom",
+  "version": "3.0.4",
   "description": "Custom core modules for Open Y distrubution.",
   "type": "drupal-module",
   "require": {
