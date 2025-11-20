@@ -1,5 +1,5 @@
 main:
-  version: 1.5
+  version: 1.6
   css:
     theme:
       assets/css/main.css: { preprocess: true }
@@ -9,12 +9,14 @@ main:
     - core/drupal
     - core/drupalSettings
     - core/once
+    - core/jquery
 
 submit:
-  version: 1.2
+  version: 1.3
   js:
     assets/js/openy_calc_submit.js: { minified: false }
   dependencies:
     - core/once
     - core/drupal
     - core/drupalSettings
+    - core/jquery
