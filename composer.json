@@ -4,7 +4,6 @@
   "type": "drupal-module",
   "require": {
     "ycloudyusa/yusaopeny": "> 11.1.0.0",
-    "twig/twig": "^2.7 || ^3.0"
   },
   "license": "GPL-2.0+",
   "minimum-stability": "dev"
