@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\Core\Field\Plugin\Field\FieldFormatter;
+namespace Drupal\openy_analytics\Plugin\Field\FieldFormatter;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Field\FieldDefinitionInterface;
