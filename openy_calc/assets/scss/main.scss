@@ -555,7 +555,8 @@ a[href="#step2"] {
                 }
               }
 
-              .price-month {
+              .price-month,
+              .join-fee {
                 font-family: var(--ylb-font-family-medium), serif;
                 font-weight: 500;
                 font-size: 24px;
@@ -563,13 +564,6 @@ a[href="#step2"] {
                 display: flex;
                 align-items: center;
                 flex-direction: column;
-              }
-
-              .join-fee {
-                font-family: var(--ylb-font-family-medium), serif;
-                font-weight: 500;
-                font-size: 20px;
-                line-height: 24px;
               }
             }
           }
