@@ -36,6 +36,11 @@ vuex:
   dependencies:
     - openy_system/vue
 
+vue3:
+  version: 3.5.41
+  js:
+    https://cdnjs.cloudflare.com/ajax/libs/vue/3.5.41/vue.global.prod.min.js: { type: external, minified: true }
+
 axios:
   version: 0.19.2
   js:
