@@ -36,9 +36,6 @@ vuex:
   dependencies:
     - openy_system/vue
 
-# Shared canonical Vue 3 for modules migrated off Vue 2 (openy_system/vue).
-# Full build: includes the runtime template compiler. Exposes window.Vue.
-# Consumers set webpack externals { vue: 'Vue' } and depend on openy_system/vue3.
 vue3:
   version: 3.5.41
   js:
