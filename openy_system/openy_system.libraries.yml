@@ -36,6 +36,20 @@ vuex:
   dependencies:
     - openy_system/vue
 
+# Shared canonical Vue 3 build for modules migrated off Vue 2 (openy_system/vue).
+# Full build: includes the runtime template compiler. Exposes window.Vue.
+# Consumers set webpack externals { vue: 'Vue' } and depend on openy_system/vue3
+# instead of bundling their own copy.
+vue3:
+  remote: https://github.com/vuejs/core
+  version: 3.5.42
+  license:
+    name: MIT
+    url: https://github.com/vuejs/core/blob/main/LICENSE
+    gpl-compatible: true
+  js:
+    assets/js/vue3/vue.global.prod.js: { minified: true, preprocess: false }
+
 axios:
   version: 0.19.2
   js:
