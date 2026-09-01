@@ -1,0 +1,10 @@
+openy_search_api.settings:
+  type: config_object
+  label: 'Open Y Search API settings'
+  mapping:
+    search_page_id:
+      type: string
+      label: 'Search page node ID'
+    search_query_key:
+      type: string
+      label: 'Search query parameter key (e.g., q)'

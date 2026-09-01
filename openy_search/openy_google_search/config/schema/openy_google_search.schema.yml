@@ -1,0 +1,13 @@
+openy_google_search.settings:
+  type: config_object
+  label: 'Open Y Google Search settings'
+  mapping:
+    google_engine_id:
+      type: string
+      label: 'Google Search Engine ID (CX)'
+    search_page_id:
+      type: string
+      label: 'Search page node ID'
+    search_query_key:
+      type: string
+      label: 'Search query parameter key (e.g., q)'
