@@ -4,7 +4,6 @@ namespace Drupal\openy_migrate\Plugin\migrate\process;
 
 use Drupal\Core\Entity\EntityTypeManagerInterface;
 use Drupal\Core\Entity\EntityTypeBundleInfoInterface;
-use Drupal\migrate\MigrateSkipProcessException;
 use Drupal\migrate\ProcessPluginBase;
 use Drupal\migrate\MigrateExecutableInterface;
 use Drupal\migrate\Row;
@@ -164,17 +163,15 @@ class SkipIfBundleNotExist extends ProcessPluginBase implements ContainerFactory
    *   The destination property currently worked on. This is only used together
    *   with the $row above.
    *
-   * @return string
-   *   Entity bundle name if exist.
-   *
-   * @throws \Drupal\migrate\MigrateSkipProcessException
-   *   Thrown if entity bundle not exist and rest of the process should
-   *   be skipped.
+   * @return string|null
+   *   Entity bundle name if exist, NULL if the rest of the pipeline is
+   *   skipped.
    */
   public function process($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $bundles = $this->entityTypeBundleInfo->getBundleInfo($this->entityName);
     if (!isset($bundles[$this->entityBundle])) {
-      throw new MigrateSkipProcessException();
+      $this->stopPipeline();
+      return NULL;
     }
     return $this->configuration['bundle'];
   }
