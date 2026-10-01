@@ -105,7 +105,9 @@ class InterstitialContentBlock extends BlockBase implements ContainerFactoryPlug
     ];
 
     $block['content'] = [
-      '#markup' => check_markup($interstitialPage->body->value, $interstitialPage->body->format),
+      '#type' => 'processed_text',
+      '#text' => $interstitialPage->body->value,
+      '#format' => $interstitialPage->body->format,
       '#prefix' => '<div id="interstitial-block">',
       '#suffix' => '</div>',
     ];
