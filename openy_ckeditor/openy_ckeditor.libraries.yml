@@ -5,3 +5,6 @@ openy-ckeditor:
       css/openy_ckeditor.css: {}
   js:
     js/openy_ckeditor.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
