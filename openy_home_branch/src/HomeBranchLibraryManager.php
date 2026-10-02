@@ -8,6 +8,7 @@ use Drupal\Core\Cache\Cache;
 use Drupal\Core\Extension\ModuleHandlerInterface;
 use Drupal\Core\Plugin\DefaultPluginManager;
 use Drupal\Core\Plugin\Factory\ContainerFactory;
+use Drupal\openy_home_branch\Attribute\HomeBranchLibrary;
 
 /**
  * Defines the base plugin for HomeBranchLibrary classes.
@@ -27,6 +28,7 @@ class HomeBranchLibraryManager extends DefaultPluginManager {
       $namespaces,
       $module_handler,
       'Drupal\openy_home_branch\HomeBranchLibraryInterface',
+      HomeBranchLibrary::class,
       'Drupal\openy_home_branch\Annotation\HomeBranchLibrary'
     );
 
