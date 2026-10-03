@@ -83,7 +83,10 @@ class EntityModerationStatus {
    *   Flag indicated the entity has changed its state.
    */
   public function entity_moderation_state_change(EntityInterface $entity) {
-    if (!$original = $entity->original) {
+    // D12: EntityBase::$original was renamed to $originalEntity with no BC
+    // magic getter (change record 3295826) — use getOriginal() when present.
+    $original = method_exists($entity, 'getOriginal') ? $entity->getOriginal() : $entity->original;
+    if (!$original) {
       return FALSE;
     }
 

@@ -843,7 +843,7 @@ class SchedulesSearchForm extends FormBase {
           'label' => $class->getTitle(),
           'time' => $time,
           'time_from' => $session_instance->getTimestamp(),
-          'description' => strip_tags(text_summary($class->field_class_description->value, $class->field_class_description->format, 140)),
+          'description' => strip_tags(\Drupal::service(\Drupal\text\TextSummary::class)->generate($class->field_class_description->value, $class->field_class_description->format, 140)),
           'included_in_membership' => $included_in_membership,
           'ticket_required' => $ticket_required,
           'url' => Url::fromUri('internal:/node/' . $class->id(), [
