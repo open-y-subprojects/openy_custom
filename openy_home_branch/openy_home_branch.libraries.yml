@@ -7,7 +7,6 @@ cookies_storage:
     - core/drupalSettings
     - core/jquery
     - core/once
-    - core/js-cookie
 
 hb_plugin_base:
   version: 0.1

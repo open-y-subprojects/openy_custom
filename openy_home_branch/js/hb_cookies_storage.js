@@ -3,7 +3,20 @@
  * Cookies storage JavaScript for the Open Y Home Branch module.
  */
 
-(function(Drupal, $, drupalSettings, once, cookies) {
+(function(Drupal, $, drupalSettings, once) {
+
+  // Replaces core/js-cookie (removed in Drupal 12); same encoding as js-cookie.
+  var cookies = {
+    get: function (name) {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : undefined;
+    },
+    set: function (name, value, days, path) {
+      var expires = new Date(Date.now() + days * 864e5).toUTCString();
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=' + path;
+    }
+  };
+
 
   "use strict";
 
@@ -85,7 +98,7 @@
     // Move current data to Cookies storage.
     updateStorage: function () {
       $(document).trigger('hb-before-storage-update', this.data);
-      cookies.set('home_branch', JSON.stringify(this.data), { expires: 360, path: drupalSettings.path.baseUrl });
+      cookies.set('home_branch', JSON.stringify(this.data), 360, drupalSettings.path.baseUrl);
       $(document).trigger('hb-after-storage-update', this.data);
     },
 
@@ -123,4 +136,4 @@
     }
   };
 
-})(Drupal, jQuery, drupalSettings, once, window.Cookies);
+})(Drupal, jQuery, drupalSettings, once);
