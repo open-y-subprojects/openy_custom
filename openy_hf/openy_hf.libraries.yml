@@ -10,4 +10,3 @@ openy_hf_generic:
     - core/drupal
     - core/drupalSettings
     - core/jquery.once
-    - core/js-cookie

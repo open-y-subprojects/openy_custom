@@ -6,8 +6,22 @@
 /**
  * @file generic.js
  */
-(function ($, Drupal, drupalSettings, Cookies) {
+(function ($, Drupal, drupalSettings) {
   "use strict";
+
+  // Replaces core/js-cookie (removed in Drupal 12); same encoding and path (/) as js-cookie.
+  var Cookies = {
+    get: function (name) {
+      var m = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+      return m ? decodeURIComponent(m[1]) : undefined;
+    },
+    set: function (name, value, expires) {
+      document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires.toUTCString() + '; path=/';
+    },
+    remove: function (name) {
+      this.set(name, '', new Date(0));
+    }
+  };
 
   /**
    * Registers behaviors related to headerless-footerless architecture.
@@ -83,7 +97,7 @@
         if (cookie === undefined) {
           var date = new Date();
           date.setTime(date.getTime() + (drupalSettings['openy_hf.cookieLifeTime'] * 1000));
-          Cookies.set(cookie_name, param, { expires: date });
+          Cookies.set(cookie_name, param, date);
         }
       }
 
@@ -114,4 +128,4 @@
     }
   };
 
-}(jQuery, Drupal, drupalSettings, window.Cookies));
+}(jQuery, Drupal, drupalSettings));
