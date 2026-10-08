@@ -253,7 +253,15 @@ class DataWrapper implements OpenyDataServiceInterface {
     }
 
     $value = $entity->get('field_mbrshp_description')->first()->getValue();
-    return check_markup($value['value'], $value['format']);
+    // check_markup() is deprecated with no direct OOP replacement (CR#3588040);
+    // render through the same text-filtering pipeline and return the markup
+    // as a string to preserve this method's existing (string) contract.
+    $build = [
+      '#type' => 'processed_text',
+      '#text' => $value['value'],
+      '#format' => $value['format'],
+    ];
+    return (string) \Drupal::service('renderer')->renderInIsolation($build);
   }
 
   /**

@@ -80,8 +80,10 @@ function openy_session_instance_actualize_sessions(EntityInterface $entity) {
       'program_subcategory' => 'field_category_program',
     ];
 
-    if (isset($entity->original)) {
-      $original = $entity->original;
+    // D12: EntityBase::$original was renamed to $originalEntity with no BC
+    // magic getter (change record 3295826) — use getOriginal() when present.
+    $original = method_exists($entity, 'getOriginal') ? $entity->getOriginal() : (isset($entity->original) ? $entity->original : NULL);
+    if (isset($original)) {
       $new = $entity->{$map_compare[$bundle]}->getValue();
       $old = $original->{$map_compare[$bundle]}->getValue();
     }
