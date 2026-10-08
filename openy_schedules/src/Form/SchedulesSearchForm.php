@@ -12,6 +12,7 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Logger\LoggerChannelFactoryInterface;
 use Drupal\Core\Url;
 use Drupal\openy_repeat\RepeatManager;
+use Drupal\text\TextSummary;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 
@@ -843,7 +844,7 @@ class SchedulesSearchForm extends FormBase {
           'label' => $class->getTitle(),
           'time' => $time,
           'time_from' => $session_instance->getTimestamp(),
-          'description' => strip_tags(text_summary($class->field_class_description->value, $class->field_class_description->format, 140)),
+          'description' => strip_tags(\Drupal::getContainer()->has(TextSummary::class) ? \Drupal::service(TextSummary::class)->generate($class->field_class_description->value, $class->field_class_description->format, 140) : text_summary($class->field_class_description->value, $class->field_class_description->format, 140)),
           'included_in_membership' => $included_in_membership,
           'ticket_required' => $ticket_required,
           'url' => Url::fromUri('internal:/node/' . $class->id(), [
