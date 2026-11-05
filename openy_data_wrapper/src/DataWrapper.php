@@ -244,8 +244,8 @@ class DataWrapper implements OpenyDataServiceInterface {
    * @param \Drupal\Core\Entity\EntityInterface $entity
    *   An object of the Membership node.
    *
-   * @return array|null
-   *   A render array for the description or NULL if no description is found.
+   * @return \Drupal\Component\Render\MarkupInterface|null
+   *   The filtered description markup or NULL if no description is found.
  */
   private function getDescription(EntityInterface $entity): mixed {
     if ($entity->get('field_mbrshp_description')->isEmpty()) {
@@ -253,15 +253,14 @@ class DataWrapper implements OpenyDataServiceInterface {
     }
 
     $value = $entity->get('field_mbrshp_description')->first()->getValue();
-    // check_markup() is deprecated with no direct OOP replacement (CR#3588040);
-    // render through the same text-filtering pipeline and return the markup
-    // as a string to preserve this method's existing (string) contract.
+    // check_markup() is deprecated with no direct OOP replacement (CR#3588040).
+    // Return the Markup object as it did: Twig autoescapes a plain string.
     $build = [
       '#type' => 'processed_text',
       '#text' => $value['value'],
       '#format' => $value['format'],
     ];
-    return (string) \Drupal::service('renderer')->renderInIsolation($build);
+    return \Drupal::service('renderer')->renderInIsolation($build);
   }
 
   /**
